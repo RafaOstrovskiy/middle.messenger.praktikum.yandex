@@ -1,0 +1,23 @@
+{
+  "name": "webchatapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "parcel src/index.html --no-source-maps --target default --dist-dir ./build",
+    "build": "parcel build src/index.html --no-source-maps --target default --dist-dir ./build",
+    "watch": "parcel watch"
+  },
+  "keywords": [],
+  "author": "Bulat A.",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-inline-string": "^2.8.2",
+    "parcel": "^2.8.2"
+  },
+  "targets": {
+    "default": {
+      "sourceMap": false
+    }
+  }
+}
