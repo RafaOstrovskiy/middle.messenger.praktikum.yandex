@@ -1,5 +1,5 @@
-import tpl from "./profile.hbs";
-import "./profile.scss";
+import tpl from "./passwordUpdate.hbs";
+import "./passwordUpdate.scss";
 
 export default function(props = {}) {
     return tpl({

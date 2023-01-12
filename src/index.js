@@ -1,14 +1,41 @@
-import Handlebars from "handlebars";
-import tpl from 'bundle-text:./index.hbs';
-import button from './components/button';
+import index from "./index.hbs";
+import signUp from "./pages/sign-up"
+import signIn from "./pages/sign-in";
+import baseLayout from "./layout/base-layout";
+import error from "./pages/error";
+import chats from "./pages/chats";
+import profile from "./pages/profile";
 
-console.log(tpl);
+import "./styles/styles.scss";
 
 
-const comp = Handlebars.compile(tpl);
-const res = comp({
-	fname: 'students',
-	btn: button('btn1','Click this', )
-});
+const root = document.getElementById("root");
+const routes = {
+	"/" : index,
+	"/login": signUp,
+	"/signin": signIn,
+	"/chats": chats,
+	"/profile": profile,
+	"/profile-edit": () => profile({ editMode: true }),
+	"/password-update": passwordUpdate,
+	"/404": () => error({ title: "404", description: "Не туда попали" }),
+	"/500": () => error({ title: "500", description: "Мы уже фиксим" }),
+}
 
-document.getElementById('root').innerHTML = res;
+function resolveRoute(route) {
+	try {
+		return routes[route];
+	} catch (e) {
+		throw new Error(`Route ${route} not found`);
+	};
+};
+
+function router() {
+	let url = window.location.hash.slice(1) || '/';
+	let route = resolveRoute(url);
+
+	route();
+};
+
+window.addEventListener("load", router);
+window.addEventListener("hashchange", router);

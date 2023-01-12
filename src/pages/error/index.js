@@ -1,5 +1,4 @@
-import tpl from "./profile.hbs";
-import "./profile.scss";
+import tpl from "./error.hbs";
 
 export default function(props = {}) {
     return tpl({

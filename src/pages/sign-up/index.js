@@ -1,10 +1,9 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
-import './style.css';
-import button from '../../components/button';
+import "./signUp.scss";
+import tpl from "./signUp.hbs";
 
-Handlebars.registerPartial('home', tpl);
 
-export default (props = {}) => {
-	return Handlebars.compile(tpl)(props);
+export default function(props = {}) {
+    return tpl({
+        ...props,
+    });
 }
