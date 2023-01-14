@@ -1,0 +1,96 @@
+@import "src/styles/colors";
+
+.chat-box {
+  &__empty-message {
+    display: flex;
+    margin: auto;
+  }
+
+  &__container {
+    height: 100%;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid map-get($colors, bg-grey-3);
+  }
+  &__username {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    span {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 13px;
+      color: map-get($colors, text-black);
+    }
+  }
+  &__avatar {
+    background-color: map-get($colors, bg-grey-3);
+    min-width: 47px;
+    min-height: 47px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  &__dropdown, &__attach, &__send {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background-color: map-get($colors, text-white);
+    border: none;
+    margin-right: 10px;
+    img {
+      cursor: pointer;
+    }
+  }
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid map-get($colors, bg-grey-3);
+  }
+  &__main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__date {
+    color: map-get($colors, text-grey);
+    font-size: 12px;
+    line-height: 12px;
+    margin: 40px auto;
+  }
+  &__form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 32px;
+    input {
+      padding: 10px 20px;
+      border: none;
+      width: 100%;
+      font-size: 12px;
+      line-height: 12px;
+      color: map-get($colors, text-grey);
+      background-color: map-get($colors, bg-grey-3);
+      border-radius: 30px;
+    }
+  }
+  &__send {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+}

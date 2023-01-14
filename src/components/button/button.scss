@@ -1,0 +1,16 @@
+@import "src/styles/colors";
+
+.button {
+  background-color: map-get($colors, blue-1);
+  color: map-get($colors, text-white);
+  border-radius: 8px;
+  padding: 12px 70px;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  &:focus-visible {
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+}

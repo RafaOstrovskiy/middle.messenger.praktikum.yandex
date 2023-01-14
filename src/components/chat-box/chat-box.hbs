@@ -1,0 +1,38 @@
+{{#if isEmpty}}
+    <span class='chat-box__empty-message'>Выберите чат чтобы отправить сообщение</span>
+{{else}}
+    <div class="chat-box__container">
+        <div class="chat-box__header">
+            <a href="#" class="chat-box__username">
+                <div class="chat-box__avatar"></div>
+                <span>Petya</span>
+            </a>
+
+
+
+            <button class="chat-box__dropdown">
+                <img src='{{ dropdownImg }}' alt='dropdown menu'>
+            </button>
+        </div>
+
+        <div class="chat-box__main">
+            <span class="chat-box__date">19 июня</span>
+            {{#each messages}}
+                {{{this}}}
+            {{/each}}
+        </div>
+
+        <div class="chat-box__footer">
+            <button class="chat-box__attach">
+                <img src='{{ attachImg }}' alt='attach'>
+            </button>
+
+            <form class="chat-box__form" action="#">
+                <input class="chat-box__input" type="text" name="message" placeholder="Сообщение">
+                <button type="submit" class="chat-box__send">
+                    <img src='{{ sendImg }}' alt='arrow right'>
+                </button>
+            </form>
+        </div>
+    </div>
+{{/if}}

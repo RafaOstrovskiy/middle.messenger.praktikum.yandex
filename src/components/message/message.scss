@@ -1,0 +1,28 @@
+@import "src/styles/colors";
+
+.message {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    padding: 11px;
+    background-color: map-get($colors, bg-grey-1);
+    margin-bottom: 10px;
+    max-width: 50%;
+    border-radius: 12px 12px 12px 0;
+    &_mine {
+      align-self: flex-end;
+      background-color: map-get($colors, bg-blue-1);
+      border-radius: 12px 12px 0 12px;
+    }
+  }
+  &__text {
+    line-height: 15px;
+  }
+  &__time {
+    display: flex;
+    align-self: flex-end;
+    font-size: 9px;
+    line-height: 9px;
+    color: map-get($colors, text-grey);
+  }
+}

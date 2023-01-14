@@ -1,0 +1,17 @@
+@import "src/styles/colors";
+.chats-page {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  &__chat-list {
+    display: flex;
+    max-width: 310px;
+    background-color: map-get($colors, bg-grey-1);
+    flex: 1;
+  }
+  &__chat-box {
+    display: flex;
+    flex: 2;
+  }
+}

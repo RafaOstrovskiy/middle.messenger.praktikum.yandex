@@ -1,41 +1,44 @@
-import index from "./index.hbs";
+import navigation from "./pages/navigation/navigation.hbs";
+import baseLayout from "./layout/base-layout";
 import signUp from "./pages/sign-up"
 import signIn from "./pages/sign-in";
-import baseLayout from "./layout/base-layout";
 import error from "./pages/error";
 import chats from "./pages/chats";
+import profileEdit from "./pages/profile-edit";
 import profile from "./pages/profile";
+import passwordUpdate from "./pages/password-update";
 
 import "./styles/styles.scss";
 
 
 const root = document.getElementById("root");
 const routes = {
-	"/" : index,
-	"/login": signUp,
-	"/signin": signIn,
+	"/" : navigation,
+	"/sign-up": signUp,
+	"/sign-in": signIn,
 	"/chats": chats,
 	"/profile": profile,
-	"/profile-edit": () => profile({ editMode: true }),
+	"/profile-edit": () => profileEdit,
 	"/password-update": passwordUpdate,
-	"/404": () => error({ title: "404", description: "Не туда попали" }),
-	"/500": () => error({ title: "500", description: "Мы уже фиксим" }),
+	"/404": () => error({ title: "404", subtitle: "Не туда попали" }),
+	"/500": () => error({ title: "500", subtitle: "Мы уже фиксим" }),
 }
 
 function resolveRoute(route) {
-	try {
+	if (routes[route]) {
 		return routes[route];
-	} catch (e) {
-		throw new Error(`Route ${route} not found`);
-	};
-};
+	} else {
+		return routes['/404'];
+	}
+}
 
 function router() {
 	let url = window.location.hash.slice(1) || '/';
+	console.log(url)
 	let route = resolveRoute(url);
-
-	route();
-};
+	let page = route();
+	root.innerHTML = baseLayout({page});
+}
 
 window.addEventListener("load", router);
 window.addEventListener("hashchange", router);

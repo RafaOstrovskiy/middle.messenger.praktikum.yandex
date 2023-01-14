@@ -1,9 +1,11 @@
-import Handlebars from 'handlebars';
-import tpl from 'bundle-text:./tpl.hbs';
-import './style.css';
+import tpl from "./button.hbs";
+import "./button.scss";
 
-Handlebars.registerPartial('button', tpl);
-
-export default (id, value) => {
-	return Handlebars.compile(tpl)({ id, value });
+export default function(props = {}) {
+    if (!props.type) {
+        props.type = "button"
+    }
+    return tpl({
+        ...props,
+    });
 }

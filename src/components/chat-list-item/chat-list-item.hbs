@@ -1,0 +1,18 @@
+<div class="chat-list-item">
+
+    <div class="chat-list-item__avatar"></div>
+
+    <div class="chat-list-item__content-left">
+        <span class="chat-list-item__message-sender">{{last_message.user.login}}</span>
+        <p class="chat-list-item__message-text">{{last_message.content}}</p>
+    </div>
+
+    <div class="chat-list-item__content-right">
+        <span class="chat-list-item__time">{{last_message.time}}</span>
+        {{#if unread_count}}
+        <div class="chat-list-item__badge">{{{unread_count}}}</div>
+        {{/if}}
+    </div>
+
+</div>
+
