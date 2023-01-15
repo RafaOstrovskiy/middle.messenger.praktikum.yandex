@@ -15,14 +15,6 @@
     "url": "https://github.com/RafaOstrovskiy/middle.messenger.praktikum.yandex/issues"
   },
   "homepage": "https://github.com/RafaOstrovskiy/middle.messenger.praktikum.yandex#readme",
-  "targets": {
-    "default": {
-      "sourceMap": false
-    }
-  },
-  "engines": {
-    "node": "16.13.0"
-  },
   "keywords": [],
   "author": "Bulat A.",
   "license": "ISC",
