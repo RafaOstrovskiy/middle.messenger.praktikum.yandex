@@ -13,11 +13,11 @@
     box-shadow: 0 0 6px map-get($colors, shadow-1);
   }
   &__link {
+    width: 100%;
+    box-sizing: border-box;
     background-color: map-get($colors, blue-1);
-    a {
-      color: map-get($colors, text-white);
-      text-decoration: none;
-    }
+    color: map-get($colors, text-white);
+    text-decoration: none;
     border-radius: 8px;
     padding: 12px 70px;
     text-align: center;
@@ -34,9 +34,5 @@
     &:focus-visible {
       outline: 5px auto -webkit-focus-ring-color;
     }
-  }
-  &__list {
-    padding: 0;
-    list-style: none;
   }
 }
