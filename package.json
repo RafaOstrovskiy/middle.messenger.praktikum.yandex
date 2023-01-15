@@ -3,8 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "parcel src/index.html --no-cache",
-    "build": "parcel build src/index.html --no-cache"
+    "start": "parcel src/index.html --open --no-cache --port=3000",
+    "build": "parcel build src/index.html --no-cache",
+    "dev": "parcel src/index.html --no-cache --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RafaOstrovskiy/middle.messenger.praktikum.yandex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RafaOstrovskiy/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/RafaOstrovskiy/middle.messenger.praktikum.yandex#readme",
+  "targets": {
+    "default": {
+      "sourceMap": false
+    }
+  },
+  "engines": {
+    "node": "16.13.0"
   },
   "keywords": [],
   "author": "Bulat A.",
