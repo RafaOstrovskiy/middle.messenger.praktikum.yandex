@@ -1,4 +1,4 @@
-import navigation from "./pages/navigation/navigation.hbs";
+import navigation from "./pages/navigation";
 import baseLayout from "./layout/base-layout";
 import signUp from "./pages/sign-up"
 import signIn from "./pages/sign-in";
@@ -34,7 +34,6 @@ function resolveRoute(route) {
 
 function router() {
 	let url = window.location.hash.slice(1) || '/';
-	console.log(url)
 	let route = resolveRoute(url);
 	let page = route();
 	root.innerHTML = baseLayout({page});

@@ -1,2 +1,55 @@
-<div class="profile">
+<div class="profile__container">
+    <div class="profile__sidebar">
+        <a href="#/chats">
+            <img src="{{ arrowLeft }}" alt="arrow-left">
+        </a>
+    </div>
+
+    <div class="profile__main">
+        {{{ avatar }}}
+
+        <div class="profile__name">
+            <span>Иван</span>
+        </div>
+
+        <ul class="profile__info-list">
+            <li class="profile__list-item">
+                <span>Почта</span>
+                <span class="grey">gmail@yandex.ru</span>
+            </li>
+            <li class="profile__list-item">
+                <span>Логин</span>
+                <span class="grey">ivanivanov</span>
+            </li>
+            <li class="profile__list-item">
+                <span>Имя</span>
+                <span class="grey">Иван</span>
+            </li>
+            <li class="profile__list-item">
+                <span>Фамилия</span>
+                <span class="grey">Иванов</span>
+            </li>
+            <li class="profile__list-item">
+                <span>Имя в чате</span>
+                <span class="grey">Иван</span>
+            </li>
+            <li class="profile__list-item">
+                <span>Телефон</span>
+                <span class="grey">+7 (909) 967 30 30</span>
+            </li>
+        </ul>
+
+        <ul class="profile__actions-list">
+            <li class="profile__list-item">
+                <a class="link" href="#/profile-edit">Изменить данные</a>
+            </li>
+            <li class="profile__list-item">
+                <a class="link" href="#/password-update">Изменить пароль</a>
+            </li>
+            <li class="profile__list-item">
+                <a class="link red" href="#/">Выйти</a>
+            </li>
+        </ul>
+
+    </div>
 </div>
