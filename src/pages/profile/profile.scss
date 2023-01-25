@@ -1,0 +1,58 @@
+@import "src/styles/colors";
+
+.profile {
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  &__sidebar {
+    display: flex;
+    height: 100%;
+    width: 64px;
+    align-items: center;
+    justify-content: center;
+    background-color: map-get($colors, bg-grey-1);
+    border-right: 1px solid map-get($colors, bg-grey-3);
+  }
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: auto;
+  }
+  &__name {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  &__info-list, &__actions-list {
+    list-style: none;
+    width: 100%;
+    max-width: 510px;
+    padding: 0;
+  }
+  &__list-item {
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+    justify-content: space-between;
+    border-bottom: 1px solid map-get($colors, bg-grey-3);
+    .grey {
+      color: map-get($colors, text-grey);
+    }
+    .link {
+      font-size: 13px;
+      line-height: 13px;
+      margin-top: 0;
+    }
+    .red {
+      color: map-get($colors, text-red-1);
+    }
+  }
+}
