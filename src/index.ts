@@ -1,61 +1,74 @@
-// import navigation from './pages/navigation';
-// import baseLayout from './layout/base-layout';
-// import signUp from './pages/sign-up';
-// import signIn from './pages/sign-in';
-// import error from './pages/error';
-// import chats from './pages/chats';
-// import profileEdit from './pages/profile-edit';
-// import profile from './pages/profile';
-// import passwordUpdate from './pages/password-update';
-
 import './styles/styles.scss';
-// import { SignInPage } from './pages/sign-in';
-import { Button } from './components/button';
-import { SignInPage } from './pages/sign-in';
+import Block from './core/block';
 
-// const root = document.getElementById('root');
-// const routes: { [key: string]: () => unknown } = {
-//   '/': navigation,
-//   '/sign-up': signUp,
-//   '/sign-in': signIn,
-//   '/chats': chats,
-//   '/profile': profile,
-//   '/profile-edit': () => profileEdit,
-//   '/password-update': passwordUpdate,
-//   '/404': () => error({ title: '404', subtitle: 'Не туда попали' }),
-//   '/500': () => error({ title: '500', subtitle: 'Мы уже фиксим' }),
-// };
+import {
+  chatsPage,
+  error404,
+  error500,
+  navigation,
+  updatePasswordPage,
+  profilePage,
+  profileEditPage,
+  signInPage,
+  signUpPage,
+} from './pages';
+import { BaseLayout } from './layout/base-layout';
 
-// function resolveRoute(route: string) {
-//   if (routes[route]) {
-//     return routes[route];
-//   }
-//   return routes['/404'];
-// }
-//
-// function router() {
-//   const url = window.location.hash.slice(1) || '/';
-//   const route = resolveRoute(url);
-//   const page = route();
-//   root!.innerHTML = baseLayout({ page });
-// }
+export enum Paths {
+  NAV = '/',
+  CHATS = '/chats',
+  ERROR404 = '/404',
+  ERROR500 = '/500',
+  PASSWORD_UPDATE = '/password-update',
+  PROFILE = '/profile',
+  PROFILE_EDIT = '/profile-edit',
+  SIGN_UP = '/sign-up',
+  SIGN_IN = '/sign-in',
+}
 
-// window.addEventListener('load', router);
-// window.addEventListener('hashchange', router);
+export const Routes: Record<Paths, Route> = {
+  [Paths.NAV]: navigation,
+  [Paths.CHATS]: chatsPage,
+  [Paths.ERROR404]: error404,
+  [Paths.ERROR500]: error500,
+  [Paths.PASSWORD_UPDATE]: updatePasswordPage,
+  [Paths.PROFILE]: profilePage,
+  [Paths.PROFILE_EDIT]: profileEditPage,
+  [Paths.SIGN_UP]: signUpPage,
+  [Paths.SIGN_IN]: signInPage,
+};
+
+export type Route = Block;
 
 
-window.addEventListener('DOMContentLoaded', () => {
-  const root = document.getElementById('root');
+function resolveRoute(route: Paths) {
+  if (Routes[route]) {
+    return Routes[route];
+  } else {
+    return Routes['/404'];
+  }
+}
 
-  const button = new Button({
-    text: 'Click',
-    events: {
-      click: () => console.log('clicked')
-    }
-  })
+function router() {
+  let url = (window.location.hash.slice(1) as Paths) || Paths.NAV;
+  let page = resolveRoute(url);
+  render(new BaseLayout({ page }));
+}
 
-  const signInPage = new SignInPage({ button });
+function render(page: Block) {
+  const root = document.querySelector("#root");
 
-  root!.append(signInPage.getContent()!)
+  if (!root) {
+    return;
+  }
 
-})
+  root.innerHTML = '';
+  root.appendChild(page.getContent());
+
+  page.dispatchComponentDidMount();
+
+  return root;
+}
+
+window.addEventListener('load', router);
+window.addEventListener('hashchange', router);
