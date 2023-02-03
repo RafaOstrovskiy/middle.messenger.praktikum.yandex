@@ -123,7 +123,7 @@ class Block<P extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _componentDidUpdate(oldProps: any, newProps: any) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -131,7 +131,7 @@ class Block<P extends Record<string, any> = any> {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+  protected componentDidUpdate(oldProps: P, newProps: P): boolean {
     let isNeedUpdate = false;
 
     for (const key in newProps) {
