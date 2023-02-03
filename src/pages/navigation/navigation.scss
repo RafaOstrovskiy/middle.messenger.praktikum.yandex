@@ -11,11 +11,13 @@
     padding: 50px 30px 30px;
     border-radius: 12px;
     box-shadow: 0 0 6px map-get($colors, shadow-1);
+
     ul {
       list-style: none;
       padding: 0;
     }
   }
+
   &__link {
     display: block;
     width: 100%;
@@ -33,9 +35,11 @@
     line-height: 13px;
     cursor: pointer;
     margin-bottom: 10px;
+
     &:hover {
       opacity: 0.7;
     }
+
     &:focus-visible {
       outline: 5px auto -webkit-focus-ring-color;
     }
