@@ -10,10 +10,9 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "typings/index.d.ts",
-    ]
+    "typeRoots": ["node_modules/@types", "typings/index.d.ts"]
   }
 }
