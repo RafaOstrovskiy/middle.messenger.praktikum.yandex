@@ -17,13 +17,12 @@
     }
   }
   &__link {
+    display: block;
     width: 100%;
     box-sizing: border-box;
     background-color: map-get($colors, blue-1);
-    a {
-      color: map-get($colors, text-white);
-      text-decoration: none;
-    }
+    color: map-get($colors, text-white);
+    text-decoration: none;
     border-radius: 8px;
     padding: 12px 70px;
     text-align: center;
