@@ -10,7 +10,7 @@ export type SignUpProps = Props & {
 };
 
 export class SignUpPage extends Block<SignUpProps> {
-  constructor(props: any) {
+  constructor(props: SignUpProps) {
     props.className = [...(props.className || []), 'sign-up-page__container'];
     super(props, 'div');
   }

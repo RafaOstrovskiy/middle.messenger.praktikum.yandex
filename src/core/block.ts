@@ -12,7 +12,7 @@ class Block<P extends Record<string, any> = any> {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
-  };
+  } as const;
 
   public id = nanoid(6);
 
@@ -83,7 +83,15 @@ class Block<P extends Record<string, any> = any> {
     const { events = {} } = this.props as P & { events: Record<string, () => void> };
 
     Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName]);
+      this._element.addEventListener(eventName, events[eventName]);
+    });
+  }
+
+  _removeEvents() {
+    const { events = {} } = this.props as P & { events: Record<string, () => void> };
+
+    Object.keys(events).forEach((eventName) => {
+      this._element.removeEventListener(eventName, events[eventName]);
     });
   }
 
@@ -148,6 +156,8 @@ class Block<P extends Record<string, any> = any> {
 
   private _render() {
     const block = this.render();
+
+    this._removeEvents();
 
     this._element.innerHTML = '';
     this._element.appendChild(block);
