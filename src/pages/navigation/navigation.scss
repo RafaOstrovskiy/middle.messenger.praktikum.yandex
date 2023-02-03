@@ -25,6 +25,7 @@
     width: 100%;
     box-sizing: border-box;
     background-color: map-get($colors, blue-1);
+
     a {
       color: map-get($colors, text-white);
       text-decoration: none;
@@ -32,6 +33,7 @@
       padding: 12px 70px;
       width: 100%;
     }
+
     border-radius: 8px;
     text-align: center;
     outline: none;

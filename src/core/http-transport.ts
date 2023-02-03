@@ -1,9 +1,9 @@
-enum METHODS  {
+enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
   PATCH = 'PATCH',
-  DELETE = 'DELETE'
+  DELETE = 'DELETE',
 }
 
 type Options = {
@@ -13,10 +13,7 @@ type Options = {
   timeout?: number;
 };
 
-type HTTPMethod = (
-  url: string,
-  options: Options
-) => Promise<XMLHttpRequest>;
+type HTTPMethod = (url: string, options: Options) => Promise<XMLHttpRequest>;
 
 function queryStringify(data: { [key: string | number]: string }) {
   // Можно делать трансформацию GET-параметров в отдельной функции
@@ -26,46 +23,44 @@ function queryStringify(data: { [key: string | number]: string }) {
 
   const arr = [];
   for (let el in data) {
-    arr.push(`${el}=${data[el]}`)
+    arr.push(`${el}=${data[el]}`);
   }
-  return "?" + arr.join('&')
+  return '?' + arr.join('&');
 }
 
 class HTTPTransport {
-  get: HTTPMethod = (url, options ) => {
+  get: HTTPMethod = (url, options) => {
     if (options.data) {
-      url = url + queryStringify(options.data)
+      url = url + queryStringify(options.data);
     }
-    return this.request(url, {...options, method: METHODS.GET}, options.timeout);
+    return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
   };
 
-
   put: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
+    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
   };
 
   post: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.POST}, options.timeout);
+    return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
   };
 
   delete: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
+    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   };
 
-
   request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
-    const {method, data, headers = {}} = options;
+    const { method, data, headers = {} } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
       xhr.timeout = timeout;
 
-      Object.keys(headers).forEach(([key,value]) => {
+      Object.keys(headers).forEach(([key, value]) => {
         xhr.setRequestHeader(key, value);
       });
 
-      xhr.onload = function() {
+      xhr.onload = function () {
         resolve(xhr);
       };
 

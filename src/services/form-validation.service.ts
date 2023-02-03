@@ -73,7 +73,7 @@ export class FormValidationService {
 
   isFormFieldValid(fieldName: string): boolean {
     const { input, errorMessage } = this.fields[fieldName].children;
-    const { error, regExp } = rules[fieldName]  || {};
+    const { error, regExp } = rules[fieldName] || {};
     const value = ((input as Block).getContent() as HTMLInputElement).value;
 
     if (!regExp) {
