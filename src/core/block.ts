@@ -16,7 +16,7 @@ class Block<P extends Record<string, any> = any> {
 
   public id = nanoid(6);
 
-  public children: Record<string, Block<any> | Block[]>;
+  public children: Record<string, Block | Block[]>;
 
   private _element: HTMLElement;
 
@@ -24,7 +24,7 @@ class Block<P extends Record<string, any> = any> {
 
   private eventBus: () => EventBus;
 
-  protected props: P;
+  props: P;
 
   constructor(propsWithChildren: P, tagName?: string) {
     const eventBus = new EventBus();
@@ -54,12 +54,15 @@ class Block<P extends Record<string, any> = any> {
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
 
-  private _getChildrenAndProps(childrenAndProps: P): { children: Record<string, Block<any> | Block[]>; props: P } {
+  private _getChildrenAndProps(childrenAndProps: P): {
+    children: Record<string, Block | Block[]>;
+    props: P;
+  } {
     const props: Record<string, unknown> = {};
     const children: Record<string, Block | Block[]> = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
-      if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+      if (Array.isArray(value) && value.length > 0 && value.every((v) => v instanceof Block)) {
         children[key as string] = value;
       } else if (value instanceof Block) {
         children[key as string] = value;
@@ -131,11 +134,11 @@ class Block<P extends Record<string, any> = any> {
     return isNeedUpdate;
   }
 
-  setProps = (nextProps: any) => {
+  setProps = (nextProps: P) => {
     if (!nextProps) {
       return;
     }
-
+    Object.assign(this.children, this._getChildrenAndProps(nextProps).children);
     Object.assign(this.props, nextProps);
   };
 
@@ -158,11 +161,11 @@ class Block<P extends Record<string, any> = any> {
   }
 
   protected compile(template: (context: any) => string, context: any) {
-    const contextAndStubs = {...context};
+    const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
-        contextAndStubs[name] = component.map(item => `<div data-id="${item.id}"></div>`)
+        contextAndStubs[name] = component.map((item) => `<div data-id="${item.id}"></div>`);
       } else {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
       }
@@ -181,7 +184,7 @@ class Block<P extends Record<string, any> = any> {
       }
       component.getContent()?.append(...Array.from(stub.childNodes));
       stub.replaceWith(component.getContent()!);
-    }
+    };
 
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
@@ -198,15 +201,15 @@ class Block<P extends Record<string, any> = any> {
     return this.element;
   }
 
-  _makePropsProxy(props: any) {
+  _makePropsProxy(props: P) {
     const self = this;
 
     return new Proxy(props, {
-      get(target, prop) {
+      get(target, prop: keyof P) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target, prop, value) {
+      set(target, prop: keyof P, value) {
         const oldTarget = { ...target };
 
         target[prop] = value;
@@ -217,12 +220,11 @@ class Block<P extends Record<string, any> = any> {
       deleteProperty() {
         throw new Error('Нет доступа');
       },
-    });
+    } as ProxyHandler<P>);
   }
 
   _createDocumentElement(tagName: string) {
-    const el = document.createElement(tagName);
-    return el;
+    return document.createElement(tagName);
   }
 
   show() {

@@ -63,8 +63,6 @@ export class Chats extends Block<Props> {
   }
 }
 
-console.log(messagesMap(mockChatHistory as MessageModel[]), 555);
-
 export const chatsPage = new Chats({
   chatList: new ChatList({}),
   chatBox: new ChatBox({

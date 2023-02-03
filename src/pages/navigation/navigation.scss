@@ -11,13 +11,19 @@
     padding: 50px 30px 30px;
     border-radius: 12px;
     box-shadow: 0 0 6px map-get($colors, shadow-1);
+    ul {
+      list-style: none;
+      padding: 0;
+    }
   }
   &__link {
     width: 100%;
     box-sizing: border-box;
     background-color: map-get($colors, blue-1);
-    color: map-get($colors, text-white);
-    text-decoration: none;
+    a {
+      color: map-get($colors, text-white);
+      text-decoration: none;
+    }
     border-radius: 8px;
     padding: 12px 70px;
     text-align: center;

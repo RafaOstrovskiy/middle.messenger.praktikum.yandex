@@ -1,0 +1,5 @@
+@import "src/styles/colors";
+
+.form-error {
+  color: map-get($colors, text-red-1);
+}

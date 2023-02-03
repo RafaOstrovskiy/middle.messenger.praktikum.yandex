@@ -7,7 +7,8 @@
     "build": "parcel build src/index.html --no-cache",
     "dev": "parcel src/index.html --no-cache --open",
     "lint": "node_modules/.bin/eslint .",
-    "lint-fix": "node_modules/.bin/eslint . --fix"
+    "lint-fix": "node_modules/.bin/eslint . --fix",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,8 @@
   "devDependencies": {
     "@parcel/transformer-inline-string": "2.8.2",
     "@parcel/transformer-sass": "2.8.2",
-    "@typescript-eslint/eslint-plugin": "^5.49.0",
-    "@typescript-eslint/parser": "^5.49.0",
+    "@typescript-eslint/eslint-plugin": "5.49.0",
+    "@typescript-eslint/parser": "5.49.0",
     "eslint": "8.32.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "8.6.0",
@@ -32,13 +33,13 @@
     "parcel": "2.8.2",
     "parcel-transformer-hbs": "1.0.4",
     "prettier": "2.8.3",
-    "stylelint": "^14.16.1",
-    "stylelint-scss": "^4.3.0",
+    "stylelint": "14.16.1",
+    "stylelint-scss": "4.3.0",
     "typescript": "4.9.4"
   },
   "dependencies": {
     "express": "4.18.2",
     "handlebars": "4.7.7",
-    "nanoid": "^4.0.0"
+    "nanoid": "4.0.0"
   }
 }

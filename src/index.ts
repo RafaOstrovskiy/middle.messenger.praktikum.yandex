@@ -40,7 +40,6 @@ export const Routes: Record<Paths, Route> = {
 
 export type Route = Block;
 
-
 function resolveRoute(route: Paths) {
   if (Routes[route]) {
     return Routes[route];
@@ -56,7 +55,7 @@ function router() {
 }
 
 function render(page: Block) {
-  const root = document.querySelector("#root");
+  const root = document.querySelector('#root');
 
   if (!root) {
     return;

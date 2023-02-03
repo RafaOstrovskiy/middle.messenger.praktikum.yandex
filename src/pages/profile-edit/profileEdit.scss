@@ -30,6 +30,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    button {
+      margin-top: 50px;
+    }
   }
   &__name {
     font-weight: 600;
@@ -54,6 +57,9 @@
     .grey {
       color: map-get($colors, text-grey);
     }
+    label {
+      width: 100%;
+    }
     input {
       border: none;
       padding: 0;
@@ -63,6 +69,4 @@
     }
   }
 }
-.button {
-  margin-top: 0!important;
-}
+

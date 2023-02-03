@@ -5,6 +5,7 @@ import Block, { Props } from '../../core/block';
 export type ButtonProps = {
   text?: string;
   type?: 'button' | 'submit';
+  src?: string
 } & Props;
 
 export class Button extends Block<ButtonProps> {
@@ -16,6 +17,7 @@ export class Button extends Block<ButtonProps> {
   _addAttributes(): void {
     super._addAttributes();
     this.element.setAttribute('type', this.props.type || 'button');
+    this.element.setAttribute('src', this.props.src || 'button');
   }
 
   render() {
