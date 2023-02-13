@@ -13,6 +13,7 @@ import {
   signUpPage,
 } from './pages';
 import { BaseLayout } from './layout/base-layout';
+import render from "./utils/renderToDOM";
 
 export enum Paths {
   NAV = '/',
@@ -54,20 +55,6 @@ function router() {
   render(new BaseLayout({ page }));
 }
 
-function render(page: Block) {
-  const root = document.querySelector('#root');
-
-  if (!root) {
-    return;
-  }
-
-  root.innerHTML = '';
-  root.appendChild(page.getContent());
-
-  page.dispatchComponentDidMount();
-
-  return root;
-}
 
 window.addEventListener('load', router);
 window.addEventListener('hashchange', router);
