@@ -1,12 +1,8 @@
 import BaseAPI from './BaseAPI';
 import {BadRequestError, SignInRequest, SignUpRequest, UserResponse} from "./api.types";
 
-
-
-
-
-export type SignupData = SignUpRequest | BadRequestError;
-
+export type SignupResponse = SignUpRequest | BadRequestError;
+export type SigninResponse = {} | BadRequestError;
 export type UserData = UserResponse | BadRequestError;
 
 export class AuthAPI extends BaseAPI {
@@ -14,14 +10,14 @@ export class AuthAPI extends BaseAPI {
     super('/auth');
   }
 
-  signin(data: SignInRequest): Promise<any> {
+  signin(data: SignInRequest): Promise<SigninResponse> {
     return this.http.post('/signin', {
       data: data,
     });
   }
 
 
-  signup(data: SignUpRequest): Promise<SignupData> {
+  signup(data: SignUpRequest): Promise<SignupResponse> {
     return this.http.post('/signup', {
       data: data,
     });
