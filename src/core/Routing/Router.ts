@@ -1,5 +1,5 @@
 import Route from "./Route";
-import Block from "../block";
+import {Props} from "../block";
 
 class Router {
     private static __instance: Router;
@@ -13,8 +13,11 @@ class Router {
         Router.__instance = this;
     }
 
-    use(pathname: string, block: Block) {
-        const route = new Route(pathname, block, {rootQuery: this._rootQuery});
+    use(pathname: string, block: any, props: Props = {}) {
+        const route = new Route(pathname, block, {
+            ...props,
+            rootQuery: this._rootQuery
+        });
         this.routes.push(route);
         return this;
     }

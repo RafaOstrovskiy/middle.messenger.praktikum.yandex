@@ -1,3 +1,5 @@
+import {queryString} from "../utils/queryStringify";
+
 enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -7,71 +9,72 @@ enum METHODS {
 }
 
 type Options = {
-  method: METHODS;
+  method?: METHODS;
   data?: any;
   headers?: Record<string, string>;
   timeout?: number;
 };
 
-type HTTPMethod = (url: string, options: Options) => Promise<XMLHttpRequest>;
+// type <R> = (url: string, options: Omit<Options, 'method'>) => Promise<XMLHttpRequest<R>>;
 
-function queryStringify(data: { [key: string | number]: string }) {
-  // Можно делать трансформацию GET-параметров в отдельной функции
-  if (typeof data !== 'object') {
-    throw new Error('Incorrect data type, has to be object');
+export default class HTTPTransport {
+  protected endpoint: string;
+  static baseURL = 'https://ya-praktikum.tech/api/v2';
+  constructor(endpoint: string) {
+    this.endpoint = `https://ya-praktikum.tech/api/v2${endpoint}`;
   }
 
-  const arr = [];
-  for (let el in data) {
-    arr.push(`${el}=${data[el]}`);
-  }
-  return '?' + arr.join('&');
-}
-
-class HTTPTransport {
-  get: HTTPMethod = (url, options) => {
-    if (options.data) {
-      url = url + queryStringify(options.data);
+  public get<R>(url: string, options?: Options): Promise<R> {
+    if (options?.data) {
+      url = url + queryString(options.data);
     }
-    return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
+    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.GET }, options?.timeout);
   };
 
-  put: HTTPMethod = (url, options) => {
-    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+  public put<R>(url: string, options: Options): Promise<R> {
+    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.PUT }, options.timeout);
   };
 
-  post: HTTPMethod = (url, options) => {
-    return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+  public post<R>(url: string, options?: Options): Promise<R> {
+    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.POST }, options?.timeout);
   };
 
-  delete: HTTPMethod = (url, options) => {
-    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  public patch<R>(url: string, options: Options): Promise<R> {
+    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.PATCH }, options.timeout);
+
+  }
+
+  delete<R>(url: string, options?: Options): Promise<R> {
+    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.DELETE }, options?.timeout);
   };
 
-  request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
-    const { method, data, headers = {} } = options;
+  request<R>(url: string, options: Options, timeout = 5000): Promise<R> {
+    let { method, data } = options;
+    if (!method) {
+      method = METHODS.GET
+    }
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
+      xhr.open(method!, url);
       xhr.timeout = timeout;
-
-      Object.keys(headers).forEach(([key, value]) => {
-        xhr.setRequestHeader(key, value);
-      });
+      xhr.setRequestHeader('Content-Type', 'application/json');
 
       xhr.onload = function () {
-        resolve(xhr);
+        resolve(xhr.response);
       };
 
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
+
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   };

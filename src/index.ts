@@ -1,5 +1,4 @@
 import './styles/styles.scss';
-import Block from './core/block';
 
 import {
   chatsPage,
@@ -12,49 +11,55 @@ import {
   signInPage,
   signUpPage,
 } from './pages';
-import { BaseLayout } from './layout/base-layout';
-import render from "./utils/renderToDOM";
+import Router from "./core/Routing/Router";
+import {BaseLayout} from "./layout/base-layout";
 
 export enum Paths {
   NAV = '/',
-  CHATS = '/chats',
+  CHATS = '/messenger',
   ERROR404 = '/404',
   ERROR500 = '/500',
   PASSWORD_UPDATE = '/password-update',
   PROFILE = '/profile',
-  PROFILE_EDIT = '/profile-edit',
+  PROFILE_EDIT = '/settings',
   SIGN_UP = '/sign-up',
   SIGN_IN = '/sign-in',
 }
+window.addEventListener('DOMContentLoaded', async () => {
+  Router
+      .use(Paths.NAV, BaseLayout, {page: navigation})
+      .use(Paths.CHATS, BaseLayout, {page: chatsPage})
+      .use(Paths.ERROR404, BaseLayout, {page: error404})
+      .use(Paths.ERROR500, BaseLayout, {page: error500})
+      .use(Paths.PASSWORD_UPDATE, BaseLayout, {page: updatePasswordPage})
+      .use(Paths.PROFILE, BaseLayout, {page: profilePage})
+      .use(Paths.PROFILE_EDIT, BaseLayout, {page: profileEditPage})
+      .use(Paths.SIGN_IN, BaseLayout, {page: signInPage})
+      .use(Paths.SIGN_UP, BaseLayout, {page: signUpPage})
+      .start()
+  // let isProtectedRoute = true;
+  //
+  // switch (window.location.pathname) {
+  //   case Paths.NAV:
+  //   case Paths.SIGN_UP:
+  //     isProtectedRoute = false;
+  //     break;
+  // }
+  //
+  // try {
+  //   await AuthController.fetchUser();
+  //
+  //   Router.start();
+  //
+  //   if (!isProtectedRoute) {
+  //     Router.go(Paths.PROFILE)
+  //   }
+  // } catch (e) {
+  //   Router.start();
+  //
+  //   if (isProtectedRoute) {
+  //     Router.go(Paths.NAV);
+  //   }
+  // }
 
-export const Routes: Record<Paths, Route> = {
-  [Paths.NAV]: navigation,
-  [Paths.CHATS]: chatsPage,
-  [Paths.ERROR404]: error404,
-  [Paths.ERROR500]: error500,
-  [Paths.PASSWORD_UPDATE]: updatePasswordPage,
-  [Paths.PROFILE]: profilePage,
-  [Paths.PROFILE_EDIT]: profileEditPage,
-  [Paths.SIGN_UP]: signUpPage,
-  [Paths.SIGN_IN]: signInPage,
-};
-
-export type Route = Block;
-
-function resolveRoute(route: Paths) {
-  if (Routes[route]) {
-    return Routes[route];
-  } else {
-    return Routes['/404'];
-  }
-}
-
-function router() {
-  let url = (window.location.hash.slice(1) as Paths) || Paths.NAV;
-  let page = resolveRoute(url);
-  render(new BaseLayout({ page }));
-}
-
-
-window.addEventListener('load', router);
-window.addEventListener('hashchange', router);
+});

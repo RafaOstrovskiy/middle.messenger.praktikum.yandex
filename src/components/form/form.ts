@@ -4,7 +4,8 @@ import { Button } from '../button';
 import { FormInput } from '../form-input';
 import { FormValidationService } from '../../services/form-validation.service';
 import { LogService } from '../../services/log.service';
-
+import {AuthService} from "../../services/auth.service";
+import {SignInRequest, SignUpRequest} from "../../api/api.types";
 export type FormProps = Props & {
   inputs?: FormInput[];
   button?: Button;
@@ -14,6 +15,7 @@ export type FormProps = Props & {
 export class Form extends Block<FormProps> {
   private formValidationService: FormValidationService;
   private logService: LogService;
+  private authService: AuthService;
 
   constructor(props: FormProps) {
     props.className = [...(props.className || [])];
@@ -21,13 +23,25 @@ export class Form extends Block<FormProps> {
 
     this.formValidationService = new FormValidationService(this);
     this.logService = new LogService();
+    this.authService = new AuthService();
 
     this.setProps({
       events: {
         submit: (event: SubmitEvent) => {
           event?.preventDefault();
           if (this.formValidationService.isFormValid()) {
-            this.logService.logFormData(this.getContent().querySelectorAll('[name]'), props.name);
+            const vals = this.logService.logFormData(this.getContent().querySelectorAll('[name]'));
+            const data = Object.fromEntries(vals);
+            switch (props.name) {
+              case "Sign In Form":
+                this.authService.signin(data as SignInRequest);
+                break;
+              case "Sign up Form":
+                this.authService.signup(data as SignUpRequest);
+                break;
+              default:
+                break
+            }
           }
         },
       },
