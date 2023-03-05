@@ -8,35 +8,37 @@
   {{{ avatar }}}
 
   <div class="profile__name">
-    <span>Иван</span>
+    <span>{{{ login }}}</span>
   </div>
 
   <ul class="profile__info-list">
     <li class="profile__list-item">
       <span>Почта</span>
-      <span class="grey">gmail@yandex.ru</span>
+      <span class="grey">{{email}}</span>
     </li>
     <li class="profile__list-item">
       <span>Логин</span>
-      <span class="grey">ivanivanov</span>
+      <span class="grey">{{ login }}</span>
     </li>
     <li class="profile__list-item">
       <span>Имя</span>
-      <span class="grey">Иван</span>
+      <span class="grey">{{ first_name }}</span>
     </li>
     <li class="profile__list-item">
       <span>Фамилия</span>
-      <span class="grey">Иванов</span>
+      <span class="grey">{{ second_name }}</span>
     </li>
     <li class="profile__list-item">
       <span>Имя в чате</span>
-      <span class="grey">Иван</span>
+      <span class="grey">{{ first_name }}</span>
     </li>
     <li class="profile__list-item">
       <span>Телефон</span>
-      <span class="grey">+7 (909) 967 30 30</span>
+      <span class="grey">{{ phone }}</span>
     </li>
   </ul>
+
+    {{{ form }}}
 
   <ul class="profile__actions-list">
     <li class="profile__list-item">
@@ -46,7 +48,7 @@
       <a class="link" href="/password-update">Изменить пароль</a>
     </li>
     <li class="profile__list-item">
-      <a class="link red" href="/">Выйти</a>
+        {{{ logoutBtn }}}
     </li>
   </ul>
 

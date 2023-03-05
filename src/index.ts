@@ -13,6 +13,7 @@ import {
 } from './pages';
 import Router from "./core/Routing/Router";
 import {BaseLayout} from "./layout/base-layout";
+import {authService} from "./services";
 
 export enum Paths {
   NAV = '/',
@@ -37,29 +38,30 @@ window.addEventListener('DOMContentLoaded', async () => {
       .use(Paths.SIGN_IN, BaseLayout, {page: signInPage})
       .use(Paths.SIGN_UP, BaseLayout, {page: signUpPage})
       .start()
-  // let isProtectedRoute = true;
-  //
-  // switch (window.location.pathname) {
-  //   case Paths.NAV:
-  //   case Paths.SIGN_UP:
-  //     isProtectedRoute = false;
-  //     break;
-  // }
-  //
-  // try {
-  //   await AuthController.fetchUser();
-  //
-  //   Router.start();
-  //
-  //   if (!isProtectedRoute) {
-  //     Router.go(Paths.PROFILE)
-  //   }
-  // } catch (e) {
-  //   Router.start();
-  //
-  //   if (isProtectedRoute) {
-  //     Router.go(Paths.NAV);
-  //   }
-  // }
+  let isProtectedRoute = true;
+
+  switch (window.location.pathname) {
+    case Paths.NAV:
+    case Paths.SIGN_UP:
+    case Paths.SIGN_IN:
+      isProtectedRoute = false;
+      break;
+  }
+
+  try {
+    await authService.fetchUser();
+
+    Router.start();
+
+    if (!isProtectedRoute) {
+      Router.go(Paths.PROFILE)
+    }
+  } catch (e) {
+    Router.start();
+
+    if (isProtectedRoute) {
+      Router.go(Paths.NAV);
+    }
+  }
 
 });

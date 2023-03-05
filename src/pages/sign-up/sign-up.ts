@@ -6,7 +6,7 @@ import { FormInput } from '../../components/form-input';
 import { Button } from '../../components/button';
 
 export type SignUpProps = Props & {
-  form: Form;
+  form?: Form;
 };
 
 export class SignUpPage extends Block<SignUpProps> {

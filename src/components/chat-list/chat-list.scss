@@ -16,6 +16,12 @@
     border-bottom: 1px solid map-get($colors, bg-grey-3);
     box-sizing: border-box;
     padding: 0 10px;
+
+    .add-chat-button {
+      width: 100%;
+      padding: 12px 12px;
+      margin-bottom: 10px;
+    }
   }
 
   &__profile-link {

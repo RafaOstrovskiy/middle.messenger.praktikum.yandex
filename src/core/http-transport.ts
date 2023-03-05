@@ -1,4 +1,4 @@
-import {queryString} from "../utils/queryStringify";
+import { queryString } from '../utils/queryStringify';
 
 enum METHODS {
   GET = 'GET',
@@ -10,7 +10,7 @@ enum METHODS {
 
 type Options = {
   method?: METHODS;
-  data?: any;
+  data?: unknown;
   headers?: Record<string, string>;
   timeout?: number;
 };
@@ -26,32 +26,51 @@ export default class HTTPTransport {
 
   public get<R>(url: string, options?: Options): Promise<R> {
     if (options?.data) {
-      url = url + queryString(options.data);
+      url = url + queryString(options.data as any);
     }
-    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.GET }, options?.timeout);
-  };
+    return this.request<R>(
+      this.endpoint + url,
+      { ...options, method: METHODS.GET },
+      options?.timeout,
+    );
+  }
 
   public put<R>(url: string, options: Options): Promise<R> {
-    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.PUT }, options.timeout);
-  };
+    return this.request<R>(
+      this.endpoint + url,
+      { ...options, method: METHODS.PUT },
+      options.timeout,
+    );
+  }
 
   public post<R>(url: string, options?: Options): Promise<R> {
-    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.POST }, options?.timeout);
-  };
+    return this.request<R>(
+      this.endpoint + url,
+      { ...options, method: METHODS.POST },
+      options?.timeout,
+    );
+  }
 
   public patch<R>(url: string, options: Options): Promise<R> {
-    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.PATCH }, options.timeout);
-
+    return this.request<R>(
+      this.endpoint + url,
+      { ...options, method: METHODS.PATCH },
+      options.timeout,
+    );
   }
 
   delete<R>(url: string, options?: Options): Promise<R> {
-    return this.request<R>(this.endpoint + url, { ...options, method: METHODS.DELETE }, options?.timeout);
-  };
+    return this.request<R>(
+      this.endpoint + url,
+      { ...options, method: METHODS.DELETE },
+      options?.timeout,
+    );
+  }
 
   request<R>(url: string, options: Options, timeout = 5000): Promise<R> {
     let { method, data } = options;
     if (!method) {
-      method = METHODS.GET
+      method = METHODS.GET;
     }
 
     return new Promise((resolve, reject) => {
@@ -77,5 +96,5 @@ export default class HTTPTransport {
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }

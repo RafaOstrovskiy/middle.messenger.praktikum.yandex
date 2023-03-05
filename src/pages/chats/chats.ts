@@ -4,6 +4,7 @@ import { ChatList } from '../../components/chat-list/chat-list';
 import { ChatBox } from '../../components/chat-box/chat-box';
 import Block, { Props } from '../../core/block';
 import { MessageModel, messagesMap } from '../../components/message';
+import ChatsService from "../../services/chats.service";
 
 const mockChatHistory = [
   {
@@ -58,6 +59,14 @@ export class Chats extends Block<Props> {
     );
   }
 
+  protected init() {
+    ChatsService.fetchChats().finally(() => {
+      (this.children.chatList as Block).setProps({
+        isLoaded: true
+      })
+    });
+  }
+
   render() {
     return this.compile(tpl, this.props);
   }
@@ -65,7 +74,5 @@ export class Chats extends Block<Props> {
 
 export const chatsPage = new Chats({
   chatList: new ChatList({}),
-  chatBox: new ChatBox({
-    messages: messagesMap(mockChatHistory as MessageModel[]),
-  }),
+  chatBox: new ChatBox({}),
 });

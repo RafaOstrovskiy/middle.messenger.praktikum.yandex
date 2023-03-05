@@ -111,6 +111,7 @@ class Block<P extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected init() {}
 
   private _componentDidMount() {
@@ -196,6 +197,7 @@ class Block<P extends Record<string, any> = any> {
       stub.replaceWith(component.getContent()!);
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
         component.forEach(replaceStub);
@@ -212,32 +214,37 @@ class Block<P extends Record<string, any> = any> {
   }
 
   _makePropsProxy(props: P) {
+    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props, {
-      get(target, prop: keyof P) {
+      get(target, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target, prop: keyof P, value) {
-        const oldTarget = { ...target };
+      set(target, prop: string, value) {
+        const oldTarget = {...target}
 
-        target[prop] = value;
+        target[prop as keyof P] = value;
 
+        // Запускаем обновление компоненты
+        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
       deleteProperty() {
         throw new Error('Нет доступа');
-      },
-    } as ProxyHandler<P>);
+      }
+    });
   }
+
 
   _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }
 
   show() {
+    console.log(this.element, 321)
     this.element!.style.display = 'block';
   }
 

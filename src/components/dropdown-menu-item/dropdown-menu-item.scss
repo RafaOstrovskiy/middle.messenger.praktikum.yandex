@@ -1,0 +1,45 @@
+@import "src/styles/colors";
+
+.menu-item {
+  white-space: nowrap;
+  position: relative;
+  line-height: 24px;
+  padding: 15px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: map-get($colors, bg-blue-1);
+  }
+
+  &.with-icon {
+    padding-left: 50px;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 15px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &.add {
+    &::before {
+      background-image: url("../../../static/plus-in-circle.svg");
+    }
+  }
+
+  &.remove {
+    &::before {
+      background-image: url("../../../static/plus-in-circle.svg");
+      transform: rotate(45deg);
+    }
+  }
+  &.delete {
+    &::before {
+      background-image: url("../../../static/plus-in-circle-red.svg");
+      transform: rotate(45deg);
+    }
+  }
+}

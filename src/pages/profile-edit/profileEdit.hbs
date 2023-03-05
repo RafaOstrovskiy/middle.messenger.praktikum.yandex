@@ -1,18 +1,46 @@
 <div class="profile-edit__sidebar">
-  <a href="/messenger">
-    <img src="{{ arrowLeft }}" alt="arrow-left">
-  </a>
+    <a href="/messenger">
+        <img src="{{ arrowLeft }}" alt="arrow-left">
+    </a>
 </div>
 
 <div class="profile-edit__main">
-  {{{ avatar }}}
+    {{{ avatar }}}
 
-  <div class="profile-edit__name">
-    <span>Иван</span>
-  </div>
+    <div class="profile-edit__name">
+        <span>{{first_name}}</span>
+    </div>
 
-    {{{ form }}}
+    <form action="#" class="profile-edit__form">
+        <ul class="profile-edit__info-list">
+            <li class="profile-edit__list-item">
+                <label for="email">Почта</label>
+                <input id="email" type="email" name="email" value={{email}}>
+            </li>
+            <li class="profile-edit__list-item">
+                <label for="login">Логин</label>
+                <input id="login" type="text" name="login" value={{login}}>
+            </li>
+            <li class="profile-edit__list-item">
+                <label for="first_name">Имя</label>
+                <input id="first_name" type="text" name="first_name" value={{first_name}}>
+            </li>
+            <li class="profile-edit__list-item">
+                <label for="second_name">Фамилия</label>
+                <input id="second_name" type="text" name="second_name" value={{second_name}}>
+            </li>
+            <li class="profile-edit__list-item">
+                <label for="display_name">Имя в чате</label>
+                <input id="display_name" type="text" name="display_name" value={{display_name}}>
+            </li>
+            <li class="profile-edit__list-item">
+                <label for="phone">Телефон</label>
+                <input id="phone" type="tel" name="phone" value={{phone}}>
+            </li>
+        </ul>
+        {{{ button }}}
 
-
+    </form>
+    <output id="output"></output>
 </div>
 

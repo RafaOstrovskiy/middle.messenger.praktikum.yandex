@@ -3,7 +3,7 @@ import store from '../core/Store';
 import router from '../core/Routing/Router';
 import {SignInRequest, SignUpRequest} from "../api/api.types";
 
-export class AuthService {
+class AuthService {
     private readonly api: AuthAPI;
 
     constructor() {
@@ -13,6 +13,8 @@ export class AuthService {
     async signin(data: SignInRequest) {
         try {
             await this.api.signin(data);
+
+            await this.fetchUser();
 
             router.go('/profile');
         } catch (e: any) {
@@ -36,6 +38,7 @@ export class AuthService {
         const user = await this.api.getUser();
 
         store.set('user', user);
+        return user
     }
 
     async logout() {
@@ -49,4 +52,4 @@ export class AuthService {
     }
 }
 
-export default new AuthService();
+export const authService = new AuthService();
