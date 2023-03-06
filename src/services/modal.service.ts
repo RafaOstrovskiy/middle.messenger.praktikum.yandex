@@ -2,14 +2,14 @@ import {Modal, ModalProps} from "../components/modal";
 
 
 export class ModalService {
+  modalRef: Modal;
   private static instance: ModalService;
-  modal: Modal;
 
   constructor() {
-    this.modal = new Modal({});
+    this.modalRef = new Modal({});
   }
 
-  public static getInstance(): ModalService {
+  public static init(): ModalService {
     if (!ModalService.instance) {
       ModalService.instance = new ModalService();
     }
@@ -19,13 +19,13 @@ export class ModalService {
 
   openModal(props: ModalProps) {
     console.log(324234)
-    this.modal.setProps({
+    this.modalRef.setProps({
       ...props,
     });
-    this.modal.show();
+    this.modalRef.show();
   }
 
   closeModal() {
-    this.modal.hide();
+    this.modalRef.hide();
   }
 }

@@ -5,10 +5,12 @@ import arrowRight from '../../../static/arrow-right.svg';
 import Block, { Props } from '../../core/block';
 import {Button} from "../button";
 import {ModalService} from "../../services/modal.service";
-import {onAddChat} from "../../utils/addChat";
 import {ChatsResponse} from "../../api/api.types";
 import {withStore} from "../../core/Store";
 import ChatsService from "../../services/chats.service";
+import {Form} from "../form";
+import {FormInput} from "../form-input";
+import chatsService from "../../services/chats.service";
 
 export type ChatListProps = Props & {
   chatsList: ChatsResponse[];
@@ -16,7 +18,7 @@ export type ChatListProps = Props & {
 }
 
 export class ChatListBase extends Block<ChatListProps> {
-  modalService: ModalService = ModalService.getInstance();
+  modalService: ModalService = ModalService.init();
 
   constructor(props: ChatListProps) {
     props.className = [...(props.className || []), 'chat-aside__container'];
@@ -28,7 +30,15 @@ export class ChatListBase extends Block<ChatListProps> {
            text: "Создать чат", type: "button", events: {
             click: () => {
               this.modalService.openModal(
-                  onAddChat(() => this.modalService.closeModal())
+                  {title: "Создание чата",
+                    content: new Form({
+                      inputs: [new FormInput({ name: "title", label: "Введите название чата" })],
+                      button: new Button({ text: "Создать", type: "submit" }),
+                      handler: (data: {title: string}) => {
+                        chatsService.create(data.title);
+                        this.modalService.closeModal()
+                      },
+                    })}
               )
             },
           }, className: ["add-chat-button"]
@@ -42,7 +52,7 @@ export class ChatListBase extends Block<ChatListProps> {
     this.children.chats = this.createChatList(this.props);
   }
 
-  protected componentDidUpdate(oldProps: ChatListProps, newProps: ChatListProps): boolean {
+  protected componentDidUpdate(_oldProps: ChatListProps, newProps: ChatListProps): boolean {
     this.children.chats = this.createChatList(newProps);
 
     return true;

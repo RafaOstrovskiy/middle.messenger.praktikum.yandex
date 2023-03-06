@@ -61,6 +61,8 @@
 
     .red {
       color: map-get($colors, text-red-1);
+      padding: 0;
+      background: none;
     }
   }
 }

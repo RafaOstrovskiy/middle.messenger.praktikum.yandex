@@ -12,7 +12,7 @@ export class BaseLayout extends Block<LayoutProps> {
     props.className = ['container'];
     super({
       ...props,
-      overlay: ModalService.getInstance().modal,
+      overlay: ModalService.init().modalRef,
     });
   }
 

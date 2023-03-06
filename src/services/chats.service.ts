@@ -28,7 +28,14 @@ class ChatsService {
     }
 
     addUserToChat(id: number, userId: number) {
-        this.api.addUsers(id, [userId]);
+        try {
+            this.api.addUsers(id, [userId]);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    removeUserFromChat(id: number, userId: number) {
+        this.api.deleteUsers(id, [userId]);
     }
 
     async delete(id: number) {
