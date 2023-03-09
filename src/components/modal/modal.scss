@@ -22,12 +22,16 @@
     max-height: 140px;
     padding: 30px;
     max-width: 350px;
-    .input__label {
-      margin-bottom: 5px;
-    }
-    .input__field {
-      border-radius: 4px;
-      margin-bottom: 10px;
+
+    .input {
+      &__label {
+        margin-bottom: 5px;
+      }
+
+      &__field {
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
     }
   }
 }

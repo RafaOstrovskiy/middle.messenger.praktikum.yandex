@@ -3,7 +3,7 @@
 .dropdown-menu {
   position: absolute;
   background-color: map-get($colors, text-white);
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
   border-radius: 12px;
   padding: 0;
 
@@ -18,8 +18,4 @@
   &.top {
     bottom: 100%;
   }
-
-  &.bottom {
-  }
-
 }

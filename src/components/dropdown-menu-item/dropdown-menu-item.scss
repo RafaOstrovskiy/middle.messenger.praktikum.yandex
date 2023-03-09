@@ -36,6 +36,7 @@
       transform: rotate(45deg);
     }
   }
+
   &.delete {
     &::before {
       background-image: url("../../../static/plus-in-circle-red.svg");

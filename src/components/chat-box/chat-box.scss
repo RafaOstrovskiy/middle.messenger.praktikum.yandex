@@ -53,14 +53,16 @@
   }
 
   &__dropdown {
-    .button__icon {
-      background: url("../../../static/dropdown-3dots.svg");
-      width: 16px;
-      height: 16px;
-      padding: 0;
-      background-position: center;
-      background-repeat: no-repeat;
-      border: 0;
+    .button {
+      &__icon {
+        background: url("../../../static/dropdown-3dots.svg");
+        width: 16px;
+        height: 16px;
+        padding: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 0;
+      }
     }
   }
 
