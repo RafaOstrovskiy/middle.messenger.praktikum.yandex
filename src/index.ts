@@ -11,9 +11,9 @@ import {
   signInPage,
   signUpPage,
 } from './pages';
-import Router from "./core/Routing/Router";
-import {BaseLayout} from "./layout/base-layout";
-import {authService} from "./services";
+import Router from './core/Routing/Router';
+import { BaseLayout } from './layout/base-layout';
+import { authService } from './services';
 
 export enum Paths {
   NAV = '/',
@@ -27,17 +27,16 @@ export enum Paths {
   SIGN_IN = '/sign-in',
 }
 window.addEventListener('DOMContentLoaded', async () => {
-  Router
-      .use(Paths.NAV, BaseLayout, {page: navigation})
-      .use(Paths.CHATS, BaseLayout, {page: chatsPage})
-      .use(Paths.ERROR404, BaseLayout, {page: error404})
-      .use(Paths.ERROR500, BaseLayout, {page: error500})
-      .use(Paths.PASSWORD_UPDATE, BaseLayout, {page: updatePasswordPage})
-      .use(Paths.PROFILE, BaseLayout, {page: profilePage})
-      .use(Paths.PROFILE_EDIT, BaseLayout, {page: profileEditPage})
-      .use(Paths.SIGN_IN, BaseLayout, {page: signInPage})
-      .use(Paths.SIGN_UP, BaseLayout, {page: signUpPage})
-      .start()
+  Router.use(Paths.NAV, BaseLayout, { page: navigation })
+    .use(Paths.CHATS, BaseLayout, { page: chatsPage })
+    .use(Paths.ERROR404, BaseLayout, { page: error404 })
+    .use(Paths.ERROR500, BaseLayout, { page: error500 })
+    .use(Paths.PASSWORD_UPDATE, BaseLayout, { page: updatePasswordPage })
+    .use(Paths.PROFILE, BaseLayout, { page: profilePage })
+    .use(Paths.PROFILE_EDIT, BaseLayout, { page: profileEditPage })
+    .use(Paths.SIGN_IN, BaseLayout, { page: signInPage })
+    .use(Paths.SIGN_UP, BaseLayout, { page: signUpPage })
+    .start();
   let isProtectedRoute = true;
 
   switch (window.location.pathname) {
@@ -54,7 +53,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     Router.start();
 
     if (!isProtectedRoute) {
-      Router.go(Paths.PROFILE)
+      Router.go(Paths.PROFILE);
     }
   } catch (e) {
     Router.start();
@@ -63,5 +62,4 @@ window.addEventListener('DOMContentLoaded', async () => {
       Router.go(Paths.NAV);
     }
   }
-
 });

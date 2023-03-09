@@ -3,9 +3,7 @@ import './chats.scss';
 import { ChatList } from '../../components/chat-list/chat-list';
 import { ChatBox } from '../../components/chat-box/chat-box';
 import Block, { Props } from '../../core/block';
-import ChatsService from "../../services/chats.service";
-
-
+import ChatsService from '../../services/chats.service';
 
 export class Chats extends Block<Props> {
   constructor(props: Props) {
@@ -21,8 +19,8 @@ export class Chats extends Block<Props> {
   protected init() {
     ChatsService.fetchChats().finally(() => {
       (this.children.chatList as Block).setProps({
-        isLoaded: true
-      })
+        isLoaded: true,
+      });
     });
   }
 

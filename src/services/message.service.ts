@@ -48,7 +48,7 @@ class MessageService {
   }
 
   closeAll() {
-    Object.values(this.transports).forEach(transport => transport.close())
+    Object.values(this.transports).forEach((transport) => transport.close());
   }
 
   private onMessageReceived(id: number, messages: ChatMessage | ChatMessage[]) {
@@ -68,14 +68,11 @@ class MessageService {
   }
 
   private onConnectionClose(id: number) {
-    delete this.transports[id]
+    delete this.transports[id];
   }
 
   private subscribe(transport: WSTransport, id: number) {
-
-    transport.on(WSTransportEvents.MESSAGE, (message) =>
-      this.onMessageReceived(id, message),
-    );
+    transport.on(WSTransportEvents.MESSAGE, (message) => this.onMessageReceived(id, message));
     transport.on(WSTransportEvents.CLOSE, () => this.onConnectionClose(id));
   }
 }

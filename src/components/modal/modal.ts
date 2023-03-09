@@ -1,6 +1,6 @@
-import tpl from "./modal.hbs";
-import "./modal.scss";
-import Block, {Props} from "../../core/block";
+import tpl from './modal.hbs';
+import './modal.scss';
+import Block, { Props } from '../../core/block';
 
 export type ModalProps = Props & {
   title?: string;
@@ -11,7 +11,7 @@ export class Modal extends Block<ModalProps> {
   constructor(props: ModalProps) {
     super({
       ...props,
-      className: ["modal-overlay"],
+      className: ['modal-overlay'],
     });
     this.initEvents();
   }
@@ -29,8 +29,8 @@ export class Modal extends Block<ModalProps> {
   }
 
   onClickOutside = (e: MouseEvent) => {
-    if ((e.target as HTMLElement).classList.contains("modal-overlay")) {
+    if ((e.target as HTMLElement).classList.contains('modal-overlay')) {
       this.hide();
     }
-  }
+  };
 }

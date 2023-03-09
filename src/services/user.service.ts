@@ -1,10 +1,8 @@
-import {ChangePasswordRequest, UserUpdateRequest} from "../api/api.types";
-import {userApi} from "../api/UserAPI";
+import { ChangePasswordRequest, UserUpdateRequest } from '../api/api.types';
+import { userApi } from '../api/UserAPI';
 
 class UserService {
-
-  constructor() {
-  }
+  constructor() {}
 
   async updateUserData(data: UserUpdateRequest) {
     try {

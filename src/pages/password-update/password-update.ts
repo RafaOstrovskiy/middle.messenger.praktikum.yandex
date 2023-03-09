@@ -6,7 +6,7 @@ import { Avatar } from '../../components/avatar/avatar';
 import Block, { Props } from '../../core/block';
 import { Form } from '../../components/form';
 import { FormInput } from '../../components/form-input';
-import {userService} from "../../services/user.service";
+import { userService } from '../../services/user.service';
 
 export class UpdatePasswordPage extends Block<Props> {
   constructor(props: Props) {
@@ -56,7 +56,7 @@ export const updatePasswordPage = new UpdatePasswordPage({
     button: new Button({ text: 'Сохранить', type: 'submit' }),
     className: ['password-update__form'],
     name: 'Profile edit Form',
-    handler: userService.updatePassword
+    handler: userService.updatePassword,
   }),
 });
 

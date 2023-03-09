@@ -9,7 +9,7 @@ export default function (props = {}) {
 }
 
 export class ChatListItem extends Block<Props> {
-    constructor(props: Props) {
+  constructor(props: Props) {
     props.className = [...(props.className || []), 'chat-list-item'];
     super(
       {
@@ -23,4 +23,3 @@ export class ChatListItem extends Block<Props> {
     return this.compile(tpl, this.props);
   }
 }
-

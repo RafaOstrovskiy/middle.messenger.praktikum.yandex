@@ -1,12 +1,12 @@
-import BaseAPI from "./BaseAPI";
-import {ChangePasswordRequest, UserUpdateRequest} from "./api.types";
+import BaseAPI from './BaseAPI';
+import { ChangePasswordRequest, UserUpdateRequest } from './api.types';
 
-export class UserAPI extends BaseAPI{
+export class UserAPI extends BaseAPI {
   constructor() {
     super('/user');
   }
 
-  readonly baseUrl = "/user";
+  readonly baseUrl = '/user';
   readonly profileUrl = `/profile`;
   readonly avatarUrl = `/profile/avatar`;
   readonly passwordUrl = `/password`;
@@ -34,9 +34,9 @@ export class UserAPI extends BaseAPI{
   }
 
   create = undefined;
-  read = undefined
+  read = undefined;
   update = undefined;
   delete = undefined;
 }
 
-export const userApi =  new UserAPI();
+export const userApi = new UserAPI();

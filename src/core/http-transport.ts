@@ -92,8 +92,7 @@ export default class HTTPTransport {
         xhr.send();
       } else if (data instanceof FormData) {
         xhr.send(data);
-      }
-      else {
+      } else {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       }

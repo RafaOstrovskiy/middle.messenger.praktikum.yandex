@@ -223,7 +223,7 @@ class Block<P extends Record<string, any> = any> {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop: string, value) {
-        const oldTarget = {...target}
+        const oldTarget = { ...target };
 
         target[prop as keyof P] = value;
 
@@ -234,10 +234,9 @@ class Block<P extends Record<string, any> = any> {
       },
       deleteProperty() {
         throw new Error('Нет доступа');
-      }
+      },
     });
   }
-
 
   _createDocumentElement(tagName: string) {
     return document.createElement(tagName);

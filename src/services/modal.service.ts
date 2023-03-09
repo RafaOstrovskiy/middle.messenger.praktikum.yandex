@@ -1,5 +1,4 @@
-import {Modal, ModalProps} from "../components/modal";
-
+import { Modal, ModalProps } from '../components/modal';
 
 export class ModalService {
   modalRef: Modal;

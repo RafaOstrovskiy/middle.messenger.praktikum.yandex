@@ -3,10 +3,10 @@ import './message.scss';
 import Block, { Props } from '../../core/block';
 
 export type MessageProps = Props & {
-    content: string;
-    isMine: boolean;
-    time: string;
-}
+  content: string;
+  isMine: boolean;
+  time: string;
+};
 
 export class MessageComponent extends Block<MessageProps> {
   constructor(props: MessageProps) {
@@ -21,4 +21,3 @@ export class MessageComponent extends Block<MessageProps> {
     return this.compile(tpl, this.props);
   }
 }
-

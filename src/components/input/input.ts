@@ -28,7 +28,7 @@ export class Input extends Block<InputProps> {
   }
 
   public setValue(value: string) {
-    return (this.element as HTMLInputElement).value = value;
+    return ((this.element as HTMLInputElement).value = value);
   }
 
   _addAttributes(): void {

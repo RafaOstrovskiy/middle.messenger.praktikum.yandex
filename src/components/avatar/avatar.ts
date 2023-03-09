@@ -2,10 +2,10 @@ import Block, { Props } from '../../core/block';
 import tpl from './avatar.hbs';
 import './avatar.scss';
 import avatarPlaceholder from '../../../static/avatar-placeholder.png';
-import {Form} from "../form";
-import {FormInput} from "../form-input";
-import {userService} from "../../services/user.service";
-import {withStore} from "../../core/Store";
+import { Form } from '../form';
+import { FormInput } from '../form-input';
+import { userService } from '../../services/user.service';
+import { withStore } from '../../core/Store';
 
 class AvatarBase extends Block<Props> {
   constructor(props: Props) {
@@ -19,31 +19,38 @@ class AvatarBase extends Block<Props> {
     );
   }
 
-    protected init() {
-        this.children.form = new Form({
-            className: ['avatarForm'],
-            // eslint-disable-next-line max-len
-            inputs: [new FormInput({name: "avatar", label: "Поменять аватар", idForLabel: 'avatar', type: 'file', onChange: this.onChangeAvatar})],
-        })
+  protected init() {
+    this.children.form = new Form({
+      className: ['avatarForm'],
+      // eslint-disable-next-line max-len
+      inputs: [
+        new FormInput({
+          name: 'avatar',
+          label: 'Поменять аватар',
+          idForLabel: 'avatar',
+          type: 'file',
+          onChange: this.onChangeAvatar,
+        }),
+      ],
+    });
+  }
+
+  onChangeAvatar(event: InputEvent): void {
+    const target = event.target as HTMLInputElement;
+    if (!target || !target.files?.length) {
+      return;
     }
 
-
-    onChangeAvatar(event: InputEvent): void {
-        const target = event.target as HTMLInputElement;
-        if (!target || !target.files?.length) {
-            return;
-        }
-
-        const form = document.querySelector('.avatarForm') as HTMLFormElement;
-        if (!form) {
-            return;
-        }
-
-        const formData = new FormData();
-        // const formData = new FormData();
-        formData.append(target.name, target.files[0]);
-        userService.updateAvatar(formData)
+    const form = document.querySelector('.avatarForm') as HTMLFormElement;
+    if (!form) {
+      return;
     }
+
+    const formData = new FormData();
+    // const formData = new FormData();
+    formData.append(target.name, target.files[0]);
+    userService.updateAvatar(formData);
+  }
 
   render() {
     return this.compile(tpl, this.props);
@@ -51,19 +58,20 @@ class AvatarBase extends Block<Props> {
 }
 
 const withUser = withStore((state) => {
-    let hasAvatar: boolean = false;
-    let path: string = ''
-    if (state.user && state.user.avatar) {
-        hasAvatar = true
-        path = `https://ya-praktikum.tech/api/v2/resources${state.user?.avatar}`
-    } else  {
-        hasAvatar = false
-        path = ''
-    }
-    return {
-        ...state.user,
-        hasAvatar: hasAvatar,
-        avatarSrc: path
-    }})
+  let hasAvatar: boolean = false;
+  let path: string = '';
+  if (state.user && state.user.avatar) {
+    hasAvatar = true;
+    path = `https://ya-praktikum.tech/api/v2/resources${state.user?.avatar}`;
+  } else {
+    hasAvatar = false;
+    path = '';
+  }
+  return {
+    ...state.user,
+    hasAvatar: hasAvatar,
+    avatarSrc: path,
+  };
+});
 
 export const Avatar = withUser(AvatarBase);

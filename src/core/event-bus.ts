@@ -15,9 +15,9 @@ export class EventBus {
   }
 
   // analogue - removeEventListener
-  off(event: string | number, callback: (e:any) => void) {
+  off(event: string | number, callback: (e: any) => void) {
     if (!this._listeners[event]) {
-      return
+      return;
     }
 
     this._listeners[event] = this._listeners[event].filter((listener) => listener !== callback);
@@ -26,7 +26,7 @@ export class EventBus {
   // analogue - dispatchEvent
   emit(event: string, ...args: unknown[]) {
     if (!this._listeners[event]) {
-      return
+      return;
     }
 
     this._listeners[event]!.forEach((listener) => {
