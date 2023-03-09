@@ -5,6 +5,7 @@ import Block, { Props } from '../../core/block';
 import { Avatar } from '../../components/avatar/avatar';
 import {Button} from "../../components/button";
 import {withStore} from "../../core/Store";
+import {authService} from "../../services";
 
 export class ProfilePage extends Block<Props> {
   constructor(props: Props) {
@@ -18,7 +19,7 @@ export class ProfilePage extends Block<Props> {
         logoutBtn: new Button({text: "Logout", className: ["link", "red"], events: {
                 click: (e) => {
                     e?.preventDefault();
-                    // authService.logout()
+                    authService.logout()
                     console.log(2,this.props)
                 }
             }} )
