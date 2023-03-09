@@ -143,7 +143,11 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
 
     private createMessages(props: ChatBoxProps) {
         return props.messages.map(data => {
-            return new MessageComponent({...data, isMine: props.userId === data.user_id, time: new Date(data.time ?? '').toLocaleDateString(), });
+            return new MessageComponent({
+                ...data,
+                isMine: props.userId === data.user_id,
+                time: new Date(data.time ?? '').toLocaleDateString(),
+            });
         })
     }
 

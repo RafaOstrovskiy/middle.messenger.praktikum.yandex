@@ -31,7 +31,7 @@ class ChatsService {
         try {
             this.api.addUsers(id, [userId]);
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
     removeUserFromChat(id: number, userId: number) {

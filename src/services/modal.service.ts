@@ -18,7 +18,6 @@ export class ModalService {
   }
 
   openModal(props: ModalProps) {
-    console.log(324234)
     this.modalRef.setProps({
       ...props,
     });

@@ -6,7 +6,6 @@ import {Form} from "../form";
 import {FormInput} from "../form-input";
 import {userService} from "../../services/user.service";
 import {withStore} from "../../core/Store";
-import {ChatBoxProps} from "../chat-box";
 
 class AvatarBase extends Block<Props> {
   constructor(props: Props) {
@@ -30,15 +29,12 @@ class AvatarBase extends Block<Props> {
 
 
     onChangeAvatar(event: InputEvent): void {
-        console.log(424234234)
         const target = event.target as HTMLInputElement;
-        console.log(target.files, 4444)
         if (!target || !target.files?.length) {
             return;
         }
 
         const form = document.querySelector('.avatarForm') as HTMLFormElement;
-        console.log(form)
         if (!form) {
             return;
         }
@@ -46,16 +42,9 @@ class AvatarBase extends Block<Props> {
         const formData = new FormData();
         // const formData = new FormData();
         formData.append(target.name, target.files[0]);
-        console.log(formData, 454)
-        formData.forEach(el => console.log(el, 33))
         userService.updateAvatar(formData)
     }
 
-    // protected componentDidUpdate(_oldProps: any, newProps: any): boolean {
-    //     this.props.avatarSrc = newProps.avatarSrc
-    //
-    //     return true;
-    // }
   render() {
     return this.compile(tpl, this.props);
   }

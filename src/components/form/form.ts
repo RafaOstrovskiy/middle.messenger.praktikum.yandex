@@ -10,7 +10,7 @@ export type FormProps = Props & {
   inputs?: FormInput[];
   button?: Button;
   name?: string;
-  handler?: (data: FormData | Record<string, string>) => void;
+  handler?: (data: FormData | Record<string, any>) => void;
 };
 
 export class Form extends Block<FormProps> {
@@ -43,7 +43,6 @@ export class Form extends Block<FormProps> {
             }
 
             if (this.formValidationService.isFormValid()) {
-              console.log(data)
               this.props.handler?.(data);
             }
           }

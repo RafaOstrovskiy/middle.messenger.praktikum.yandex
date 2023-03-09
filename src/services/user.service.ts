@@ -1,6 +1,5 @@
 import {ChangePasswordRequest, UserUpdateRequest} from "../api/api.types";
 import {userApi} from "../api/UserAPI";
-import router from "../core/Routing/Router";
 
 class UserService {
 
@@ -16,7 +15,6 @@ class UserService {
   }
 
   async updateAvatar(data: FormData) {
-    console.log(data, 333)
     try {
       await userApi.changeUserAvatar(data);
     } catch (e: any) {

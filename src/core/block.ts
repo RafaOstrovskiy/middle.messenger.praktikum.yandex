@@ -244,7 +244,6 @@ class Block<P extends Record<string, any> = any> {
   }
 
   show() {
-    console.log(this.element, 321)
     this.element!.style.display = 'block';
   }
 

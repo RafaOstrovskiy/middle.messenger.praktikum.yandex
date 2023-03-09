@@ -20,7 +20,6 @@ export class ProfilePage extends Block<Props> {
                 click: (e) => {
                     e?.preventDefault();
                     authService.logout()
-                    console.log(2,this.props)
                 }
             }} )
       },
