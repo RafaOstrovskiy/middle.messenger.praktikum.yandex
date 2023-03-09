@@ -7,7 +7,7 @@ import { FormInput } from '../../components/form-input';
 import { Button } from '../../components/button';
 
 export class SignInPage extends Block<SignUpProps> {
-  constructor(props: any) {
+  constructor(props: SignUpProps) {
     props.className = [...(props.className || []), 'sign-in-page__container'];
     super(props, 'div');
   }

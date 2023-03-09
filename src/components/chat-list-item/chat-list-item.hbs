@@ -1,14 +1,14 @@
-<div class="chat-list-item__avatar"></div>
+<img src="{{avatar}}" class="chat-list-item__avatar"></img>
 
 <div class="chat-list-item__content-left">
-  <span class="chat-list-item__message-sender">{{login}}</span>
-  <p class="chat-list-item__message-text">{{content}}</p>
+  <span class="chat-list-item__message-sender">{{title}}</span>
+  <p class="chat-list-item__message-text">{{last_message.content}}</p>
 </div>
 
 <div class="chat-list-item__content-right">
   <span class="chat-list-item__time">{{time}}</span>
   {{#if unread_count}}
-    <div class="chat-list-item__badge">{{{unread_count}}}</div>
+    <div class="chat-list-item__badge">{{unread_count}}</div>
   {{/if}}
 </div>
 

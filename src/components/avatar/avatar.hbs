@@ -1,5 +1,10 @@
-<img src="{{ avatarPlaceholder }}" alt="Avatar" />
-<form>
-  <label for="avatar">Поменять аватар</label>
-  <input type="file" name="avatar" />
-</form>
+{{#if hasAvatar}}
+    <img class="avatar-img" src="{{avatarSrc}}" alt="Avatar"/>
+{{else}}
+    <img src="{{ avatarPlaceholder }}" />
+{{/if}}
+<!--<form>-->
+<!--  <label for="avatar">Поменять аватар</label>-->
+<!--  <input type="file" name="avatar" />-->
+<!--</form>-->
+{{{form}}}

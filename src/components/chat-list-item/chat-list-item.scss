@@ -8,9 +8,11 @@
   flex-direction: row;
   justify-content: space-between;
   box-sizing: border-box;
+
   &:hover {
     background-color: map-get($colors, bg-blue-1);
   }
+
   &__avatar {
     background-color: map-get($colors, bg-grey-3);
     min-width: 47px;
@@ -18,13 +20,12 @@
     border-radius: 50%;
     margin-right: 10px;
   }
-  &__content-left {
 
-  }
   &__message-sender {
     display: flex;
     margin-bottom: 4px;
   }
+
   &__message-text {
     margin: 0;
     display: -webkit-box;
@@ -38,12 +39,14 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
+
   &__content-right {
     margin-left: auto;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
   }
+
   &__time {
     font-size: 9px;
     line-height: 13px;
@@ -51,6 +54,7 @@
     display: flex;
     margin-bottom: 14px;
   }
+
   &__badge {
     width: 20px;
     height: 20px;

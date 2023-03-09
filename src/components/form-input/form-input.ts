@@ -8,6 +8,8 @@ export type FormInputProps = Props &
   InputProps & {
     label?: string;
     errorMessage?: FormError;
+    idForLabel?: string;
+    onChange?: (event: InputEvent) => void;
   };
 
 export class FormInput extends Block<FormInputProps> {
@@ -17,8 +19,12 @@ export class FormInput extends Block<FormInputProps> {
       {
         ...props,
         label: props.label,
+        idForLabel: props.idForLabel,
         input: new Input(props),
         errorMessage: new FormError({ text: '' }),
+        events: {
+          change: props.onChange!,
+        },
       },
       'div',
     );

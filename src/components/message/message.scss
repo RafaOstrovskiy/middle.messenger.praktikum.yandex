@@ -9,15 +9,19 @@
     margin-bottom: 10px;
     max-width: 50%;
     border-radius: 12px 12px 12px 0;
+    word-break: break-all;
+
     &_mine {
       align-self: flex-end;
       background-color: map-get($colors, bg-blue-1);
-      border-radius: 12px 12px 0 12px;
+      border-radius: 12px 12px 0;
     }
   }
+
   &__text {
     line-height: 15px;
   }
+
   &__time {
     display: flex;
     align-self: flex-end;

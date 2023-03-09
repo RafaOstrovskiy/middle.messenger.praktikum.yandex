@@ -9,7 +9,8 @@
     "server": "ts-node server.js",
     "lint": "node_modules/.bin/eslint .",
     "lint-fix": "node_modules/.bin/eslint . --fix",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "stylelint": "npx stylelint --fix '**/*.scss'"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "stylelint": "14.16.1",
     "stylelint-scss": "4.3.0",
     "ts-node": "10.9.1",
+    "stylelint-config-standard-scss": "6.1.0",
     "typescript": "4.9.4"
   },
   "dependencies": {

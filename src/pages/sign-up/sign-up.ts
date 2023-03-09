@@ -6,11 +6,11 @@ import { FormInput } from '../../components/form-input';
 import { Button } from '../../components/button';
 
 export type SignUpProps = Props & {
-  form: Form;
+  form?: Form;
 };
 
 export class SignUpPage extends Block<SignUpProps> {
-  constructor(props: any) {
+  constructor(props: SignUpProps) {
     props.className = [...(props.className || []), 'sign-up-page__container'];
     super(props, 'div');
   }
