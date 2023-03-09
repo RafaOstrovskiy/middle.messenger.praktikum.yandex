@@ -16,10 +16,15 @@ class ChatsService {
   }
 
   async fetchChats() {
-    const chats = await this.api.getChats();
+    const { response } = await this.api.getChats();
+    const chats = JSON.parse(response);
+
+    console.log(chats);
 
     chats.map(async (chat) => {
       const token = await this.getToken(chat.id);
+
+      console.log(chat, 2, token);
 
       await MessageService.connect(chat.id, token);
     });

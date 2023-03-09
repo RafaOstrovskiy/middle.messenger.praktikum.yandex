@@ -16,15 +16,12 @@ export class Chats extends Block<Props> {
     );
   }
 
-  protected init() {
+  render() {
     ChatsService.fetchChats().finally(() => {
       (this.children.chatList as Block).setProps({
         isLoaded: true,
       });
     });
-  }
-
-  render() {
     return this.compile(tpl, this.props);
   }
 }

@@ -66,6 +66,7 @@ export default class WSTransport extends EventBus {
     });
 
     socket.addEventListener('message', (message) => {
+      console.log(message);
       const data = JSON.parse(message.data);
 
       if (data.type === 'pong') {

@@ -22,7 +22,7 @@ export class AuthAPI extends BaseAPI {
     });
   }
 
-  getUser(): Promise<UserData> {
+  getUser() {
     return this.http.get('/user');
   }
 
