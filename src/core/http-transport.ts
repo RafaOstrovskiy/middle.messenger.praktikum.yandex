@@ -78,15 +78,20 @@ export default class HTTPTransport {
       xhr.open(method!, url);
       xhr.timeout = timeout;
 
+      xhr.withCredentials = true;
+
       xhr.onload = function () {
-        resolve(xhr.response);
+        if (xhr.status === 200) {
+          // @ts-ignore
+          resolve(xhr);
+        } else {
+          reject(xhr);
+        }
       };
 
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
-
-      xhr.withCredentials = true;
 
       if (method === METHODS.GET || !data) {
         xhr.send();

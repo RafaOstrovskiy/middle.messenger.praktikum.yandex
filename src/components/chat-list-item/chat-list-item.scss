@@ -24,6 +24,7 @@
   &__message-sender {
     display: flex;
     margin-bottom: 4px;
+    word-break: break-word;
   }
 
   &__message-text {

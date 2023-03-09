@@ -35,10 +35,10 @@ class AuthService {
   }
 
   async fetchUser() {
-    const user = await this.api.getUser();
+    // @ts-ignore
+    const { response } = await this.api.getUser();
 
-    store.set('user', user);
-    return user;
+    store.set('user', JSON.parse(response));
   }
 
   async logout() {

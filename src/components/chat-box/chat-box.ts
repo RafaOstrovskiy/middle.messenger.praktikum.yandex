@@ -150,7 +150,6 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
 }
 
 const withSelectedChatMessages = withStore((state) => {
-  console.log(state);
   const selectedChatId = state.selectedChat;
   let chatTitle,
     chatAvatar = '';
