@@ -16,7 +16,7 @@ class ChatsService {
     }
 
     async fetchChats() {
-        const chats = await this.api.read();
+        const chats = await this.api.getChats();
 
         chats.map(async (chat) => {
             const token = await this.getToken(chat.id);
@@ -42,6 +42,7 @@ class ChatsService {
         await this.api.delete(id);
 
         this.fetchChats();
+        store.set('selectedChat', undefined);
     }
 
     getToken(id: number) {

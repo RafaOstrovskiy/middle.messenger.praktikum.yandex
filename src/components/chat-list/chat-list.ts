@@ -62,6 +62,7 @@ export class ChatListBase extends Block<ChatListProps> {
     return props.chats.map((data: any) => {
       return new ChatListItem({
         ...data,
+        time: data.last_message? new Date(data.last_message?.time).toLocaleDateString()  : '',
         events: {
           click: () => {
             ChatsService.selectChat(data.id);

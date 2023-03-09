@@ -43,6 +43,7 @@ export class Form extends Block<FormProps> {
             }
 
             if (this.formValidationService.isFormValid()) {
+              console.log(data)
               this.props.handler?.(data);
             }
           }

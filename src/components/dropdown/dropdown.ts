@@ -13,6 +13,8 @@ export class Dropdown extends Block<DropdownProps> {
   constructor(props: DropdownProps) {
     props.className = ["dropdown"];
     super(props);
+  }
+  init() {
     (this.children.btn as Block).setProps({
       events: {
         click: () => {

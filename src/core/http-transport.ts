@@ -26,7 +26,7 @@ export default class HTTPTransport {
 
   public get<R>(url: string, options?: Options): Promise<R> {
     if (options?.data) {
-      url = url + queryString(options.data as any);
+      url = url + '?' + queryString(options.data as any);
     }
     return this.request<R>(
       this.endpoint + url,
@@ -77,7 +77,6 @@ export default class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.open(method!, url);
       xhr.timeout = timeout;
-      xhr.setRequestHeader('Content-Type', 'application/json');
 
       xhr.onload = function () {
         resolve(xhr.response);
@@ -92,7 +91,11 @@ export default class HTTPTransport {
 
       if (method === METHODS.GET || !data) {
         xhr.send();
-      } else {
+      } else if (data instanceof FormData) {
+        xhr.send(data);
+      }
+      else {
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       }
     });

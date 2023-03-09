@@ -5,7 +5,7 @@ import Block, { Props } from '../../core/block';
 export type MessageProps = Props & {
     content: string;
     isMine: boolean;
-    time: Date;
+    time: string;
 }
 
 export class MessageComponent extends Block<MessageProps> {

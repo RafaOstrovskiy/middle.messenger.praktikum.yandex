@@ -11,11 +11,11 @@ export type DropdownMenuProps = Props & {
 export class DropdownMenu extends Block<DropdownMenuProps> {
   constructor(props: DropdownMenuProps) {
     props.className = [
-      "menu",
+      "dropdown-menu",
       props.position?.[0] || "bottom",
       props.position?.[1] || "right",
     ];
-    super(props, "menu");
+    super(props, "div");
   }
 
   render() {

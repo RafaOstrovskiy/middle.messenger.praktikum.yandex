@@ -27,6 +27,7 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
 
     constructor(props: ChatBoxProps) {
         props.className = ['chat-box__container'];
+        // @ts-ignore
         super({
             ...props,
             dropdownImg,
@@ -57,6 +58,8 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
                             title: "Добавить пользователя",
                             events: {
                                 click: () =>
+                                {
+                                    this.children.menu.children.menu.hide()
                                     this.modalService.openModal(
                                         {
                                             title: "Добавить пользователя в чат",
@@ -64,20 +67,22 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
                                                 inputs: [new FormInput({name: "userId", label: "ID пользователя"})],
                                                 button: new Button({text: "Добавиssть", type: "submit"}),
                                                 handler: (data: { userId: number }) => {
-                                                    console.log(data.userId)
                                                     chatsService.addUserToChat(this.props.selectedChat!, data.userId);
                                                     this.modalService.closeModal();
                                                 },
                                             }),
                                         }
-                                    ),
+                                    )
+                                }
+
                             },
                         }),
                         new DropdownMenuItem({
                             type: "remove",
                             title: "Удалить пользователя",
                             events: {
-                                click: () =>
+                                click: () => {
+                                    this.children.menu.children.menu.hide()
                                     this.modalService.openModal(
                                         {
                                             title: "Удалить пользователя из чата",
@@ -85,30 +90,38 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
                                                 inputs: [new FormInput({name: "userId", label: "ID пользователя"})],
                                                 button: new Button({text: "Добавить", type: "submit"}),
                                                 handler: (data: { userId: number }) => {
-                                                    chatsService.removeUserFromChat(this.props.selectedChat!, data.userId);
+                                                    chatsService.removeUserFromChat(
+                                                        this.props.selectedChat!, data.userId
+                                                    );
                                                     this.modalService.closeModal();
                                                 },
                                             })
                                         }
-                                    ),
+                                    )
+                                }
                             },
                         }),
                         new DropdownMenuItem({
                             type: "delete",
                             title: "Удалить чат",
                             events: {
-                                click: () =>
+                                click: () => {
+                                    this.children.menu.children.menu.hide()
                                     this.modalService.openModal(
                                         {
                                             title: "Вы уверены что хотите удалить чат?",
                                             content: new Button({text: "Да, удалить!", type: "submit", events: {
-                                                click: () => {
-                                                    chatsService.delete(this.props.selectedChat!);
-                                                    this.modalService.closeModal();
-                                                }
+                                                    click: () => {
+                                                        console.log(this.props.selectedChat)
+                                                        chatsService.delete(this.props.selectedChat!)
+
+                                                        this.modalService.closeModal();
+                                                    }
                                                 }})
                                         }
-                                    ),
+                                    )
+                                }
+
                             },
                         }),
                     ],
@@ -130,7 +143,7 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
 
     private createMessages(props: ChatBoxProps) {
         return props.messages.map(data => {
-            return new MessageComponent({...data, isMine: props.userId === data.user_id});
+            return new MessageComponent({...data, isMine: props.userId === data.user_id, time: new Date(data.time ?? '').toLocaleDateString(), });
         })
     }
 
@@ -140,6 +153,8 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
 }
 
 const withSelectedChatMessages = withStore(state => {
+
+    console.log(state)
     const selectedChatId = state.selectedChat;
     let chatTitle, chatAvatar = "";
 

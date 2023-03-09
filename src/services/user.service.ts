@@ -1,23 +1,35 @@
 import {ChangePasswordRequest, UserUpdateRequest} from "../api/api.types";
-import API, {UserAPI} from "../api/UserAPI";
+import {userApi} from "../api/UserAPI";
+import router from "../core/Routing/Router";
 
 class UserService {
-  private readonly api: UserAPI;
 
   constructor() {
-    this.api = API;
   }
 
   async updateUserData(data: UserUpdateRequest) {
-    const { resp } = await this.api.changeUserData(data);
+    try {
+      await userApi.changeUserData(data);
+    } catch (e: any) {
+      console.error(e);
+    }
   }
 
   async updateAvatar(data: FormData) {
-    const { resp } = await this.api.changeUserAvatar(data);
+    console.log(data, 333)
+    try {
+      await userApi.changeUserAvatar(data);
+    } catch (e: any) {
+      console.error(e);
+    }
   }
 
   updatePassword(data: ChangePasswordRequest) {
-    this.api.changeUserPassword(data);
+    try {
+      userApi.changeUserPassword(data);
+    } catch (e: any) {
+      console.error(e);
+    }
   }
 }
 

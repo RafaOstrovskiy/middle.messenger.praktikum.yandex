@@ -1,6 +1,11 @@
 import BaseAPI from './BaseAPI';
 import {ChatsResponse, ChatUserResponse} from "./api.types";
 
+export const defaultChatRequestParams = {
+  offset: 0,
+  limit: 20,
+};
+
 export class ChatsAPI extends BaseAPI {
   constructor() {
     super('/chats');
@@ -15,8 +20,8 @@ export class ChatsAPI extends BaseAPI {
   }
 
 
-  read(): Promise<ChatsResponse[]> {
-    return this.http.get('/');
+  getChats(data = defaultChatRequestParams): Promise<ChatsResponse[]> {
+    return this.http.get('/', {data: data});
   }
 
   getUsers(id: number): Promise<Array<ChatUserResponse>> {
@@ -37,6 +42,7 @@ export class ChatsAPI extends BaseAPI {
     return response.token;
   }
 
+  read = undefined;
   update = undefined;
 }
 
