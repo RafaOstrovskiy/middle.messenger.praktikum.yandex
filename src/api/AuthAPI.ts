@@ -1,39 +1,35 @@
-import BaseAPI from './BaseAPI';
 import { BadRequestError, SignInRequest, SignUpRequest, UserResponse } from './api.types';
+import HTTPTransport from '../core/http-transport';
 
 export type SignupResponse = SignUpRequest | BadRequestError;
 export type SigninResponse = {} | BadRequestError;
 export type UserData = UserResponse | BadRequestError;
 
-export class AuthAPI extends BaseAPI {
+export class AuthAPI {
+  protected http: HTTPTransport;
   constructor() {
-    super('/auth');
+    this.http = new HTTPTransport('/auth');
   }
 
   signin(data: SignInRequest): Promise<SigninResponse> {
     return this.http.post('/signin', {
-      data: data,
+      data,
     });
   }
 
   signup(data: SignUpRequest): Promise<SignupResponse> {
     return this.http.post('/signup', {
-      data: data,
+      data,
     });
   }
 
-  getUser() {
+  getUser(): Promise<UserResponse> {
     return this.http.get('/user');
   }
 
   logout() {
     return this.http.post('/logout');
   }
-
-  create = undefined;
-  read = undefined;
-  update = undefined;
-  delete = undefined;
 }
 
-export default new AuthAPI();
+export const authApi = new AuthAPI();

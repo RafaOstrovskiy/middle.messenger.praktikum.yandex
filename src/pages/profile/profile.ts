@@ -16,7 +16,7 @@ export class ProfilePage extends Block<Props> {
         avatar: new Avatar({}),
         arrowLeft,
         logoutBtn: new Button({
-          text: 'Logout',
+          text: 'Выйти',
           className: ['link', 'red'],
           events: {
             click: (e) => {
@@ -40,5 +40,3 @@ const withUser = withStore((state) => ({ ...state.user }));
 const ProfilePageWithUserStore = withUser(ProfilePage);
 
 export const profilePage = new ProfilePageWithUserStore({});
-
-// export const profilePage = new ProfilePage({});
