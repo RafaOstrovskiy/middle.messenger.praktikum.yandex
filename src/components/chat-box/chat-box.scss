@@ -52,7 +52,20 @@
     margin-right: 10px;
   }
 
-  &__dropdown,
+  &__dropdown {
+    .button {
+      &__icon {
+        background: url("../../../static/dropdown-3dots.svg");
+        width: 16px;
+        height: 16px;
+        padding: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 0;
+      }
+    }
+  }
+
   &__attach,
   &__send {
     display: flex;
@@ -77,10 +90,13 @@
   }
 
   &__main {
+    padding: 20px 0;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    max-height: 100%;
+    overflow-y: auto;
   }
 
   &__date {

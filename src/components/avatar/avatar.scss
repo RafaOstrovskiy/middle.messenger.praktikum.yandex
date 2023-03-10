@@ -27,6 +27,13 @@
     top: 45px;
   }
 
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    border-radius: 50%;
+  }
+
   label {
     color: map-get($colors, text-white);
     visibility: hidden;
@@ -40,6 +47,8 @@
     opacity: 0;
     height: 100%;
     position: absolute;
+    top: 0;
+    left: 0;
   }
 
   &:hover {

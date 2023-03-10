@@ -1,108 +1,84 @@
 import tpl from './chat-list.hbs';
 import './chat-list.scss';
-import { chatListItemMap } from '../chat-list-item/chat-list-item';
+import { ChatListItem } from '../chat-list-item/chat-list-item';
 import arrowRight from '../../../static/arrow-right.svg';
 import Block, { Props } from '../../core/block';
+import { Button } from '../button';
+import { ModalService } from '../../services/modal.service';
+import { ChatsResponse } from '../../api/api.types';
+import { withStore } from '../../core/Store';
+import { Form } from '../form';
+import { FormInput } from '../form-input';
+import { chatsService } from '../../services';
 
-const mockChats = [
-  {
-    id: 123,
-    title: 'my-chat',
-    avatar: '/123/avatar1.jpg',
-    unread_count: 15,
-    last_message: {
-      user: {
-        first_name: 'Petya',
-        second_name: 'Pupkin',
-        avatar: '/path/to/avatar.jpg',
-        email: 'my@email.com',
-        login: 'Petya',
-        phone: '8(911)-222-33-22',
-      },
-      time: '23:10',
-      content: 'this is message content',
-    },
-  },
-  {
-    id: 1324,
-    title: 'my-chatqq',
-    avatar: '/123/avatar1.jpg',
-    unread_count: 0,
-    last_message: {
-      user: {
-        first_name: 'Vasya',
-        second_name: 'Pupkin',
-        avatar: '/path/to/avatar.jpg',
-        email: 'my@email.com',
-        login: 'Vasya',
-        phone: '8(911)-222-33-22',
-      },
-      time: '22:00',
-      content: 'Hi',
-    },
-  },
-  {
-    id: 235235,
-    title: 'my-chatqq',
-    avatar: '/123/avatar1.jpg',
-    unread_count: 0,
-    last_message: {
-      user: {
-        first_name: 'Sasha',
-        second_name: 'Pupkin',
-        avatar: '/path/to/avatar.jpg',
-        email: 'my@email.com',
-        login: 'Sasha',
-        phone: '8(911)-222-33-22',
-      },
-      time: '12:00',
-      content:
-        'China said on Saturday that it had recorded nearly 60,000 fatalities linked to the coronavirus in the month since the country',
-    },
-  },
-  {
-    id: 235235,
-    title: 'my-chatqq',
-    avatar: '/123/avatar1.jpg',
-    unread_count: 4,
-    last_message: {
-      user: {
-        first_name: 'Katya',
-        second_name: 'Pupkina',
-        avatar: '/path/to/avatar.jpg',
-        email: 'my@email.com',
-        login: 'Katya',
-        phone: '8(911)-222-33-22',
-      },
-      time: 'пн',
-      content:
-        'The unexpected disclosure was made as the country faces mounting criticism for providing unreliable data on its latest coronavirus outbreak.',
-    },
-  },
-];
+export type ChatListProps = Props & {
+  chatsList: ChatsResponse[];
+  isLoaded: boolean;
+};
 
-export default function (props = {}) {
-  return tpl({
-    ...props,
-    chats: chatListItemMap(mockChats),
-    arrowRight,
-  });
-}
+export class ChatListBase extends Block<ChatListProps> {
+  modalService: ModalService = ModalService.init();
 
-export class ChatList extends Block<Props> {
-  constructor(props: Props) {
+  constructor(props: ChatListProps) {
     props.className = [...(props.className || []), 'chat-aside__container'];
     super(
       {
         ...props,
-        chats: chatListItemMap(mockChats),
         arrowRight,
+        button: new Button({
+          text: 'Создать чат',
+          type: 'button',
+          events: {
+            click: () => {
+              this.modalService.openModal({
+                title: 'Создание чата',
+                content: new Form({
+                  inputs: [new FormInput({ name: 'title', label: 'Введите название чата' })],
+                  button: new Button({ text: 'Создать', type: 'submit' }),
+                  handler: (data: { title: string }) => {
+                    chatsService.create(data.title);
+                    this.modalService.closeModal();
+                  },
+                }),
+              });
+            },
+          },
+          className: ['add-chat-button'],
+        }),
       },
       'div',
     );
+  }
+
+  protected init() {
+    this.children.chats = this.createChatList(this.props);
+  }
+
+  protected componentDidUpdate(_oldProps: ChatListProps, newProps: ChatListProps): boolean {
+    this.children.chats = this.createChatList(newProps);
+
+    return true;
+  }
+
+  private createChatList(props: ChatListProps) {
+    return props.chats.map((data: any) => {
+      return new ChatListItem({
+        ...data,
+        time: data.last_message ? new Date(data.last_message?.time).toLocaleDateString() : '',
+        events: {
+          click: () => {
+            chatsService.selectChat(data.id);
+          },
+        },
+      });
+    });
   }
 
   render() {
     return this.compile(tpl, this.props);
   }
 }
+
+const withChats = withStore((state) => ({ chats: [...(state.chats || [])] }));
+
+export const ChatList = withChats(ChatListBase);

@@ -1,12 +1,12 @@
 export class EventBus {
-  private readonly _listeners: Record<string, Array<() => void>>;
+  private readonly _listeners: Record<string, Array<(e: any) => void>>;
 
   constructor() {
     this._listeners = {};
   }
 
   // analogue - addEventListener
-  on(event: string, callback: () => void) {
+  on(event: string, callback: (e: any) => void) {
     if (!this._listeners[event]) {
       this._listeners[event] = [];
     }
@@ -15,9 +15,9 @@ export class EventBus {
   }
 
   // analogue - removeEventListener
-  off(event: string | number, callback: () => void) {
+  off(event: string | number, callback: (e: any) => void) {
     if (!this._listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      return;
     }
 
     this._listeners[event] = this._listeners[event].filter((listener) => listener !== callback);
@@ -26,7 +26,7 @@ export class EventBus {
   // analogue - dispatchEvent
   emit(event: string, ...args: unknown[]) {
     if (!this._listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      return;
     }
 
     this._listeners[event]!.forEach((listener) => {
