@@ -10,8 +10,13 @@
 </div>
 
 <ul class="chat-aside__list">
-  {{#each chats}}
-    <li>{{{this}}}</li>
-  {{/each}}
+
+    {{#if isLoaded }}
+        {{#each chats}}
+            <li>{{{this}}}</li>
+        {{/each}}
+    {{else}}
+        Loading...
+    {{/if}}
 </ul>
 

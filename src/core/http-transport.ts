@@ -15,13 +15,11 @@ type Options = {
   timeout?: number;
 };
 
-// type <R> = (url: string, options: Omit<Options, 'method'>) => Promise<XMLHttpRequest<R>>;
-
 export default class HTTPTransport {
   protected endpoint: string;
   static baseURL = 'https://ya-praktikum.tech/api/v2';
   constructor(endpoint: string) {
-    this.endpoint = `https://ya-praktikum.tech/api/v2${endpoint}`;
+    this.endpoint = `${HTTPTransport.baseURL}${endpoint}`;
   }
 
   public get<R>(url: string, options?: Options): Promise<R> {

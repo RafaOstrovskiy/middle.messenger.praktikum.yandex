@@ -17,16 +17,21 @@ export class Chats extends Block<Props> {
   }
 
   render() {
-    chatsService.fetchChats().finally(() => {
-      (this.children.chatList as Block).setProps({
-        isLoaded: true,
+    chatsService
+      .fetchChats()
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        (this.children.chatList as Block).setProps({
+          isLoaded: true,
+        });
       });
-    });
     return this.compile(tpl, this.props);
   }
 }
 
 export const chatsPage = new Chats({
-  chatList: new ChatList({}),
+  chatList: new ChatList({ isLoaded: false }),
   chatBox: new ChatBox({}),
 });

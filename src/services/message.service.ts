@@ -3,6 +3,7 @@ import store from '../core/Store';
 import { ChatMessage } from '../api/api.types';
 
 class MessageService {
+  ws_baseURL: string = 'wss://ya-praktikum.tech/ws/chats/';
   private transports: Record<number, WSTransport> = {};
 
   async connect(id: number, token: string) {
@@ -12,9 +13,7 @@ class MessageService {
 
     const userId = store.getState().user.id;
 
-    const wsTransport = new WSTransport(
-      `wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`,
-    );
+    const wsTransport = new WSTransport(`${this.ws_baseURL}${userId}/${id}/${token}`);
 
     this.transports[id] = wsTransport;
 
