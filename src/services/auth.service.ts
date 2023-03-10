@@ -1,18 +1,12 @@
-import API, { AuthAPI } from '../api/AuthAPI';
+import { authApi } from '../api/AuthAPI';
 import store from '../core/Store';
 import router from '../core/Routing/Router';
 import { SignInRequest, SignUpRequest } from '../api/api.types';
 
 class AuthService {
-  private readonly api: AuthAPI;
-
-  constructor() {
-    this.api = API;
-  }
-
   async signin(data: SignInRequest) {
     try {
-      await this.api.signin(data);
+      await authApi.signin(data);
 
       await this.fetchUser();
 
@@ -24,7 +18,7 @@ class AuthService {
 
   async signup(data: SignUpRequest) {
     try {
-      await this.api.signup(data);
+      await authApi.signup(data);
 
       await this.fetchUser();
 
@@ -35,16 +29,13 @@ class AuthService {
   }
 
   async fetchUser() {
-    // @ts-ignore
-    const { response } = await this.api.getUser();
-
+    const { response } = await authApi.getUser();
     store.set('user', JSON.parse(response));
   }
 
   async logout() {
     try {
-      await this.api.logout();
-
+      await authApi.logout();
       router.go('/');
     } catch (e: any) {
       console.error(e.message);

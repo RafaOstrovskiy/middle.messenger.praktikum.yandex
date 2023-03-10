@@ -1,30 +1,24 @@
-import API, { ChatsAPI } from '../api/ChatsAPI';
 import store from '../core/Store';
 import MessageService from './message.service';
+import { chatsApi } from '../api/ChatsAPI';
 
-class ChatsService {
-  private readonly api: ChatsAPI;
-
-  constructor() {
-    this.api = API;
-  }
-
+export class ChatsService {
   async create(title: string) {
-    await this.api.create(title);
+    try {
+      await chatsApi.create(title);
 
-    this.fetchChats();
+      this.fetchChats();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   async fetchChats() {
-    const { response } = await this.api.getChats();
+    const { response } = await chatsApi.getChats();
     const chats = JSON.parse(response);
-
-    console.log(chats);
 
     chats.map(async (chat) => {
       const token = await this.getToken(chat.id);
-
-      console.log(chat, 2, token);
 
       await MessageService.connect(chat.id, token);
     });
@@ -34,24 +28,28 @@ class ChatsService {
 
   addUserToChat(id: number, userId: number) {
     try {
-      this.api.addUsers(id, [userId]);
+      chatsApi.addUsers(id, [userId]);
     } catch (e) {
       console.error(e);
     }
   }
   removeUserFromChat(id: number, userId: number) {
-    this.api.deleteUsers(id, [userId]);
+    chatsApi.deleteUsers(id, [userId]);
   }
 
   async delete(id: number) {
-    await this.api.delete(id);
+    try {
+      await chatsApi.delete(id);
 
-    this.fetchChats();
-    store.set('selectedChat', undefined);
+      this.fetchChats();
+      store.set('selectedChat', undefined);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   getToken(id: number) {
-    return this.api.getToken(id);
+    return chatsApi.getToken(id);
   }
 
   selectChat(id: number) {
@@ -59,9 +57,4 @@ class ChatsService {
   }
 }
 
-const chatsService = new ChatsService();
-
-// @ts-ignore
-window.chatsController = chatsService;
-
-export default chatsService;
+export const chatsService = new ChatsService();

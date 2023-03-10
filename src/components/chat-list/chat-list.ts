@@ -7,10 +7,9 @@ import { Button } from '../button';
 import { ModalService } from '../../services/modal.service';
 import { ChatsResponse } from '../../api/api.types';
 import { withStore } from '../../core/Store';
-import ChatsService from '../../services/chats.service';
 import { Form } from '../form';
 import { FormInput } from '../form-input';
-import chatsService from '../../services/chats.service';
+import { chatsService } from '../../services';
 
 export type ChatListProps = Props & {
   chatsList: ChatsResponse[];
@@ -68,7 +67,7 @@ export class ChatListBase extends Block<ChatListProps> {
         time: data.last_message ? new Date(data.last_message?.time).toLocaleDateString() : '',
         events: {
           click: () => {
-            ChatsService.selectChat(data.id);
+            chatsService.selectChat(data.id);
           },
         },
       });

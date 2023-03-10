@@ -1,14 +1,15 @@
-import BaseAPI from './BaseAPI';
 import { ChatsResponse, ChatUserResponse } from './api.types';
+import HTTPTransport from '../core/http-transport';
 
 export const defaultChatRequestParams = {
   offset: 0,
   limit: 20,
 };
 
-export class ChatsAPI extends BaseAPI {
+export class ChatsAPI {
+  protected http: HTTPTransport;
   constructor() {
-    super('/chats');
+    this.http = new HTTPTransport('/chats');
   }
 
   create(title: string) {
@@ -20,7 +21,7 @@ export class ChatsAPI extends BaseAPI {
   }
 
   getChats(data = defaultChatRequestParams): Promise<ChatsResponse[]> {
-    return this.http.get('/', { data: data });
+    return this.http.get('/', { data });
   }
 
   getUsers(id: number): Promise<Array<ChatUserResponse>> {
@@ -40,9 +41,6 @@ export class ChatsAPI extends BaseAPI {
 
     return JSON.parse(response).token;
   }
-
-  read = undefined;
-  update = undefined;
 }
 
-export default new ChatsAPI();
+export const chatsApi = new ChatsAPI();

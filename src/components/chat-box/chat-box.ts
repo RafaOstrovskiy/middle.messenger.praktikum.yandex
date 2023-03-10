@@ -14,7 +14,7 @@ import { ChatMessage } from '../../api/api.types';
 import { MessageComponent } from '../message';
 import MessageService from '../../services/message.service';
 import { ModalService } from '../../services/modal.service';
-import chatsService from '../../services/chats.service';
+import { chatsService } from '../../services/chats.service';
 
 export type ChatBoxProps = Props & {
   selectedChat: number | undefined;

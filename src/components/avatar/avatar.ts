@@ -22,7 +22,6 @@ class AvatarBase extends Block<Props> {
   protected init() {
     this.children.form = new Form({
       className: ['avatarForm'],
-      // eslint-disable-next-line max-len
       inputs: [
         new FormInput({
           name: 'avatar',
@@ -47,7 +46,6 @@ class AvatarBase extends Block<Props> {
     }
 
     const formData = new FormData();
-    // const formData = new FormData();
     formData.append(target.name, target.files[0]);
     userService.updateAvatar(formData);
   }
