@@ -6,7 +6,7 @@ import Block, { Props } from '../../core/block';
 import { Button } from '../button';
 import { ModalService } from '../../services/modal.service';
 import { ChatsResponse } from '../../api/api.types';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 import { Form } from '../form';
 import { FormInput } from '../form-input';
 import { chatsService } from '../../services';

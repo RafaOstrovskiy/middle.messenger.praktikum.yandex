@@ -1,7 +1,7 @@
 import Block from '../core/block';
 
-export default function render(query: string, page: Block) {
-  const root = document.querySelector(query);
+export default function render(page: Block) {
+  const root = document.querySelector('#root');
 
   if (!root) {
     throw new Error('Error: root not found');

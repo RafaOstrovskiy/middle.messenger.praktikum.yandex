@@ -1,4 +1,4 @@
-import store from '../core/Store';
+import store from '../core/store';
 import MessageService from './message.service';
 import { chatsApi } from '../api/ChatsAPI';
 

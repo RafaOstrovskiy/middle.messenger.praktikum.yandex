@@ -5,7 +5,7 @@ import { Button } from '../../components/button';
 import Block, { Props } from '../../core/block';
 import { Avatar } from '../../components/avatar/avatar';
 import { SignUpProps } from '../sign-up';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 import { FormInput } from '../../components/form-input';
 import { Form } from '../../components/form';
 import { UserResponse } from '../../api/api.types';

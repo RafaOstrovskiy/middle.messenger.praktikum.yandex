@@ -4,7 +4,7 @@ import arrowLeft from '../../../static/rounded-arrow-left.svg';
 import Block, { Props } from '../../core/block';
 import { Avatar } from '../../components/avatar/avatar';
 import { Button } from '../../components/button';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 import { authService } from '../../services';
 
 export class ProfilePage extends Block<Props> {

@@ -9,7 +9,7 @@ import { Button } from '../button';
 import { Dropdown } from '../dropdown';
 import { DropdownMenu } from '../dropdown-menu';
 import { DropdownMenuItem } from '../dropdown-menu-item';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 import { ChatMessage } from '../../api/api.types';
 import { MessageComponent } from '../message';
 import MessageService from '../../services/message.service';
