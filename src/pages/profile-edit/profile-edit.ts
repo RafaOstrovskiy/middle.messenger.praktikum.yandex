@@ -9,7 +9,7 @@ import { FormInput } from '../../components/form-input';
 import { Form } from '../../components/form';
 import { UserResponse } from '../../api/api.types';
 import { userService } from '../../services/user.service';
-import router from "../../core/Routing/router";
+import router from '../../core/Routing/router';
 
 export class ProfileEditPage extends Block<SignUpProps> {
   constructor(props: Props) {
@@ -18,13 +18,16 @@ export class ProfileEditPage extends Block<SignUpProps> {
       {
         ...props,
         avatar: new Avatar({}),
-        backButton: new Button({ type: 'button', className: ['arrowLeftButton'], events: {
+        backButton: new Button({
+          type: 'button',
+          className: ['arrow-left-button'],
+          events: {
             click: (e) => {
-              e?.preventDefault()
-              router.go('/profile')
+              e?.preventDefault();
+              router.go('/profile');
             },
-          }
-        })
+          },
+        }),
       },
       'nav',
     );

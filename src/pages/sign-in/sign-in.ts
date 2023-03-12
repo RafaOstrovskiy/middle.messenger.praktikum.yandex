@@ -5,7 +5,7 @@ import { SignUpProps } from '../sign-up';
 import { Form } from '../../components/form';
 import { FormInput } from '../../components/form-input';
 import { Button } from '../../components/button';
-import {Link} from "../../components/link";
+import { Link } from '../../components/link';
 
 export class SignInPage extends Block<SignUpProps> {
   constructor(props: SignUpProps) {
@@ -44,6 +44,6 @@ export const signInPage = new SignInPage({
   }),
   link: new Link({
     label: 'Нет аккаунта?',
-    to: '/sign-up'
-  })
+    to: '/sign-up',
+  }),
 });

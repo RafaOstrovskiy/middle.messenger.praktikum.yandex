@@ -1,20 +1,19 @@
 import { ChangePasswordRequest, UserUpdateRequest } from '../api/api.types';
 import { userApi } from '../api/UserAPI';
-import router from "../core/Routing/router";
-import store from "../core/store";
+import router from '../core/Routing/router';
+import store from '../core/store';
 
 class UserService {
   constructor() {}
 
   async updateUserData(data: UserUpdateRequest): Promise<void> {
     try {
-      await userApi.changeUserData(data).then(
-          ( res: any ) => {
+      await userApi.changeUserData(data).then((res: any) => {
         const code = res.status;
 
-        if ( code === 200 ) {
+        if (code === 200) {
           store.set('user', JSON.parse(res.response));
-          router.go('/profile')
+          router.go('/profile');
         }
       });
     } catch (e: any) {
@@ -33,7 +32,7 @@ class UserService {
   updatePassword(data: ChangePasswordRequest) {
     try {
       userApi.changeUserPassword(data);
-      router.go('/profile')
+      router.go('/profile');
     } catch (e: any) {
       console.error(e);
     }

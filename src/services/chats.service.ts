@@ -1,7 +1,7 @@
 import store from '../core/store';
 import MessageService from './message.service';
 import { chatsApi } from '../api/ChatsAPI';
-import {ChatsResponse} from "../api/api.types";
+import { ChatsResponse } from '../api/api.types';
 
 export class ChatsService {
   async create(title: string) {
@@ -15,22 +15,20 @@ export class ChatsService {
   }
 
   async fetchChats() {
-    await chatsApi.getChats().then(
-        ( res: any ) => {
-          const code = res.status;
+    await chatsApi.getChats().then((res: any) => {
+      const code = res.status;
 
-          if ( code === 200 ) {
-            const chats = JSON.parse(res.response);
+      if (code === 200) {
+        const chats = JSON.parse(res.response);
 
-            chats.map(async (chat: ChatsResponse) => {
-              const token = await this.getToken(chat.id);
-              await MessageService.connect(chat.id, token);
-            });
-
-            store.set('chats', chats);
-          }
+        chats.map(async (chat: ChatsResponse) => {
+          const token = await this.getToken(chat.id);
+          await MessageService.connect(chat.id, token);
         });
 
+        store.set('chats', chats);
+      }
+    });
   }
 
   addUserToChat(id: number, userId: number) {

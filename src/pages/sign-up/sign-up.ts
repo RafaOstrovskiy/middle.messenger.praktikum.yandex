@@ -4,7 +4,7 @@ import Block, { Props } from '../../core/block';
 import { Form } from '../../components/form';
 import { FormInput } from '../../components/form-input';
 import { Button } from '../../components/button';
-import {Link} from "../../components/link";
+import { Link } from '../../components/link';
 
 export type SignUpProps = Props & {
   form?: Form;
@@ -87,6 +87,6 @@ export const signUpPage = new SignUpPage({
   }),
   link: new Link({
     label: 'Войти',
-    to: '/sign-in'
-  })
+    to: '/sign-in',
+  }),
 });

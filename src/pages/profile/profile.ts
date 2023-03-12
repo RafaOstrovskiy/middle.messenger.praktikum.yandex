@@ -5,8 +5,8 @@ import { Avatar } from '../../components/avatar/avatar';
 import { Button } from '../../components/button';
 import { withStore } from '../../core/store';
 import { authService } from '../../services';
-import {Link} from "../../components/link";
-import router from "../../core/Routing/router";
+import { Link } from '../../components/link';
+import router from '../../core/Routing/router';
 
 export class ProfilePage extends Block<Props> {
   constructor(props: Props) {
@@ -25,21 +25,24 @@ export class ProfilePage extends Block<Props> {
             },
           },
         }),
-          editProfileLink: new Link({
-              label: 'Изменить данные',
-              to: '/settings'
-          }),
-          editPasswordLink: new Link({
-              label: 'Изменить пароль',
-              to: '/password-update'
-          }),
-          backButton: new Button({ type: 'button', className: ['arrowLeftButton'], events: {
-                  click: (e) => {
-                      e?.preventDefault()
-                      router.go('/messenger')
-                  },
-              }
-          })
+        editProfileLink: new Link({
+          label: 'Изменить данные',
+          to: '/settings',
+        }),
+        editPasswordLink: new Link({
+          label: 'Изменить пароль',
+          to: '/password-update',
+        }),
+        backButton: new Button({
+          type: 'button',
+          className: ['arrow-left-button'],
+          events: {
+            click: (e) => {
+              e?.preventDefault();
+              router.go('/messenger');
+            },
+          },
+        }),
       },
       'nav',
     );
