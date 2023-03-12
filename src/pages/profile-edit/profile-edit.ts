@@ -1,6 +1,5 @@
 import tpl from './profileEdit.hbs';
 import './profileEdit.scss';
-import arrowLeft from '../../../static/rounded-arrow-left.svg';
 import { Button } from '../../components/button';
 import Block, { Props } from '../../core/block';
 import { Avatar } from '../../components/avatar/avatar';
@@ -19,7 +18,6 @@ export class ProfileEditPage extends Block<SignUpProps> {
       {
         ...props,
         avatar: new Avatar({}),
-        arrowLeft,
         backButton: new Button({ type: 'button', className: ['arrowLeftButton'], events: {
             click: (e) => {
               e?.preventDefault()

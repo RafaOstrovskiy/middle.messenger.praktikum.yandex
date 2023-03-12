@@ -1,7 +1,5 @@
 import tpl from './chat-box.hbs';
 import './chat-box.scss';
-import dropdownImg from '../../../static/dropdown-3dots.svg';
-import attachImg from '../../../static/share.svg';
 import Block, { Props } from '../../core/block';
 import { Form } from '../form';
 import { FormInput } from '../form-input';
@@ -30,8 +28,6 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
     // @ts-ignore
     super({
       ...props,
-      dropdownImg,
-      attachImg,
       form: new Form({
         inputs: [
           new FormInput({
@@ -58,7 +54,7 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
               title: 'Добавить пользователя',
               events: {
                 click: () => {
-                  this.children.menu.children.menu.hide();
+                  ((this.children.menu as Block).children.menu as Block).hide();
                   this.modalService.openModal({
                     title: 'Добавить пользователя в чат',
                     content: new Form({
@@ -78,7 +74,7 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
               title: 'Удалить пользователя',
               events: {
                 click: () => {
-                  this.children.menu.children.menu.hide();
+                  ((this.children.menu as Block).children.menu as Block).hide();
                   this.modalService.openModal({
                     title: 'Удалить пользователя из чата',
                     content: new Form({
@@ -98,7 +94,7 @@ export class ChatBoxBase extends Block<ChatBoxProps> {
               title: 'Удалить чат',
               events: {
                 click: () => {
-                  this.children.menu.children.menu.hide();
+                  ((this.children.menu as Block).children.menu as Block).hide();
                   this.modalService.openModal({
                     title: 'Вы уверены что хотите удалить чат?',
                     content: new Button({

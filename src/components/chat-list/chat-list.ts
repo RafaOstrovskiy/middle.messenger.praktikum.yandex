@@ -1,7 +1,6 @@
 import tpl from './chat-list.hbs';
 import './chat-list.scss';
 import { ChatListItem } from '../chat-list-item/chat-list-item';
-import arrowRight from '../../../static/arrow-right.svg';
 import Block, { Props } from '../../core/block';
 import { Button } from '../button';
 import { ModalService } from '../../services/modal.service';
@@ -25,7 +24,6 @@ export class ChatListBase extends Block<ChatListProps> {
     super(
       {
         ...props,
-        arrowRight,
         button: new Button({
           text: 'Создать чат',
           type: 'button',

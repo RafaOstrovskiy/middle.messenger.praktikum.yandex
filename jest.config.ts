@@ -18,6 +18,7 @@ export default {
         '^nanoid(/(.*)|$)': 'nanoid$1',
     },
 
+
     // The paths to modules that run some code to configure or set up the testing environment before each test
     setupFiles: [
         '<rootDir>/src/tests/setup-env.ts'

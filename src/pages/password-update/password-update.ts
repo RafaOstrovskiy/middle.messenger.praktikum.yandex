@@ -1,6 +1,5 @@
 import tpl from './passwordUpdate.hbs';
 import './passwordUpdate.scss';
-import arrowLeft from '../../../static/rounded-arrow-left.svg';
 import { Button } from '../../components/button';
 import { Avatar } from '../../components/avatar/avatar';
 import Block, { Props } from '../../core/block';
@@ -16,7 +15,6 @@ export class UpdatePasswordPage extends Block<Props> {
       {
         ...props,
         avatar: new Avatar({}),
-        arrowLeft,
         backButton: new Button({ type: 'button', className: ['arrowLeftButton'], events: {
             click: (e) => {
               e?.preventDefault()

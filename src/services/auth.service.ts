@@ -29,8 +29,14 @@ class AuthService {
   }
 
   async fetchUser() {
-    const { response } = await authApi.getUser();
-    store.set('user', JSON.parse(response));
+    await authApi.getUser().then(
+        ( res: any ) => {
+          const code = res.status;
+
+          if ( code === 200 ) {
+            store.set('user', JSON.parse(res.response));
+          }
+        });
   }
 
   async logout() {

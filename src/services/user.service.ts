@@ -6,11 +6,17 @@ import store from "../core/store";
 class UserService {
   constructor() {}
 
-  async updateUserData(data: UserUpdateRequest) {
+  async updateUserData(data: UserUpdateRequest): Promise<void> {
     try {
-      const { response } =  await userApi.changeUserData(data);
-      store.set('user', JSON.parse(response))
-      router.go('/profile')
+      await userApi.changeUserData(data).then(
+          ( res: any ) => {
+        const code = res.status;
+
+        if ( code === 200 ) {
+          store.set('user', JSON.parse(res.response));
+          router.go('/profile')
+        }
+      });
     } catch (e: any) {
       console.error(e);
     }

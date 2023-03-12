@@ -1,6 +1,5 @@
 import tpl from './profile.hbs';
 import './profile.scss';
-import arrowLeft from '../../../static/rounded-arrow-left.svg';
 import Block, { Props } from '../../core/block';
 import { Avatar } from '../../components/avatar/avatar';
 import { Button } from '../../components/button';
@@ -16,7 +15,6 @@ export class ProfilePage extends Block<Props> {
       {
         ...props,
         avatar: new Avatar({}),
-        arrowLeft,
         logoutBtn: new Button({
           text: 'Выйти',
           className: ['link', 'red'],
