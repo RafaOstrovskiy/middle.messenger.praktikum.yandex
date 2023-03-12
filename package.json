@@ -11,7 +11,7 @@
     "lint-fix": "node_modules/.bin/eslint . --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "stylelint": "npx stylelint --fix '**/*.scss'",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

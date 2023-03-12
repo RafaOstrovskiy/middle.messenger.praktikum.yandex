@@ -9,7 +9,7 @@ class MockBlock extends Block<MockBlockProps> {
     super({ ...props }, 'div');
   }
   render(): DocumentFragment {
-    return this.compile(() => 'Hello world', {});
+    return this.compile(() => '<div></div>', {});
   }
 }
 const mockBlock = new MockBlock({
@@ -17,15 +17,28 @@ const mockBlock = new MockBlock({
 });
 
 describe('core/Block', () => {
-  it('Create component', () => {
+  it('check block create', () => {
     expect(mockBlock.getContent().innerHTML).toBeTruthy();
   });
-
   it('should set props', () => {
     const block = new Block({});
 
     block.setProps({ test: 123 });
 
     expect(block.props).toEqual({ test: 123 });
+  });
+  it('check dispatchComponentDidMount', () => {
+    const block = new MockBlock({
+      text: 'Test',
+    });
+    expect(block.dispatchComponentDidMount).toBeDefined();
+  });
+  it('check hide', () => {
+    mockBlock.hide();
+    expect(mockBlock.getContent()!.style.display).toStrictEqual('none');
+  });
+  it('check show', () => {
+    mockBlock.show();
+    expect(mockBlock.getContent()!.style.display).toStrictEqual('block');
   });
 });
