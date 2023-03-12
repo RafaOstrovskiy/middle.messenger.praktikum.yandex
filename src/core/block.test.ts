@@ -20,7 +20,7 @@ describe('core/Block', () => {
   it('Create component', () => {
     expect(mockBlock.getContent().innerHTML).toBeTruthy();
   });
-  // ЮНИТ-ТЕСТ на модуль
+
   it('should set props', () => {
     const block = new Block({});
 

@@ -10,6 +10,7 @@ import { withStore } from '../../core/store';
 import { Form } from '../form';
 import { FormInput } from '../form-input';
 import { chatsService } from '../../services';
+import {Link} from "../link";
 
 export type ChatListProps = Props & {
   chatsList: ChatsResponse[];
@@ -45,6 +46,10 @@ export class ChatListBase extends Block<ChatListProps> {
           },
           className: ['add-chat-button'],
         }),
+        link: new Link({
+          label: 'Профиль',
+          to: '/profile'
+        })
       },
       'div',
     );

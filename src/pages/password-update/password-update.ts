@@ -7,6 +7,7 @@ import Block, { Props } from '../../core/block';
 import { Form } from '../../components/form';
 import { FormInput } from '../../components/form-input';
 import { userService } from '../../services/user.service';
+import router from "../../core/Routing/router";
 
 export class UpdatePasswordPage extends Block<Props> {
   constructor(props: Props) {
@@ -16,6 +17,13 @@ export class UpdatePasswordPage extends Block<Props> {
         ...props,
         avatar: new Avatar({}),
         arrowLeft,
+        backButton: new Button({ type: 'button', className: ['arrowLeftButton'], events: {
+            click: (e) => {
+              e?.preventDefault()
+              router.go('/profile')
+            },
+          }
+        })
       },
       'nav',
     );

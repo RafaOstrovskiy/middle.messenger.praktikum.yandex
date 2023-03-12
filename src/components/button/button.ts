@@ -5,7 +5,6 @@ import Block, { Props } from '../../core/block';
 export type ButtonProps = {
   text?: string;
   type?: 'button' | 'submit';
-  src?: string;
 } & Props;
 
 export class Button extends Block<ButtonProps> {
