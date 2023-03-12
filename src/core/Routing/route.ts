@@ -22,9 +22,7 @@ export default class Route {
   }
 
   leave() {
-    if (this._block) {
-      this._block.hide();
-    }
+    this._block = null;
   }
 
   match(pathname: string) {
@@ -34,7 +32,7 @@ export default class Route {
   render() {
     if (!this._block) {
       this._block = new this._blockClass(this._props);
-      render(this._props.rootQuery, this._block as Block);
+      render(this._block as Block);
       return;
     }
 

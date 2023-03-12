@@ -1,5 +1,5 @@
 import WSTransport, { WSTransportEvents } from '../core/ws-transport';
-import store from '../core/Store';
+import store from '../core/store';
 import { ChatMessage } from '../api/api.types';
 
 class MessageService {

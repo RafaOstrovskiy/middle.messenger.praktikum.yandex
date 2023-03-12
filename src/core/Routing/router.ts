@@ -1,4 +1,4 @@
-import Route from './Route';
+import Route from './route';
 import { Props } from '../block';
 
 class Router {

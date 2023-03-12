@@ -1,6 +1,6 @@
 import { authApi } from '../api/AuthAPI';
-import store from '../core/Store';
-import router from '../core/Routing/Router';
+import store from '../core/store';
+import router from '../core/Routing/router';
 import { SignInRequest, SignUpRequest } from '../api/api.types';
 
 class AuthService {
@@ -29,8 +29,13 @@ class AuthService {
   }
 
   async fetchUser() {
-    const { response } = await authApi.getUser();
-    store.set('user', JSON.parse(response));
+    await authApi.getUser().then((res: any) => {
+      const code = res.status;
+
+      if (code === 200) {
+        store.set('user', JSON.parse(res.response));
+      }
+    });
   }
 
   async logout() {

@@ -20,9 +20,11 @@ export class Store extends EventBus {
   private state: any = {};
 
   public set(keypath: string, data: unknown) {
+    const prevState = { ...this.state };
+
     set(this.state, keypath, data);
 
-    this.emit(StoreEvents.Updated, this.getState());
+    this.emit(StoreEvents.Updated, prevState, this.getState());
   }
 
   public getState() {

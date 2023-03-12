@@ -1,6 +1,6 @@
 import { queryString } from '../utils/queryStringify';
 
-enum METHODS {
+export enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -33,11 +33,11 @@ export default class HTTPTransport {
     );
   }
 
-  public put<R>(url: string, options: Options): Promise<R> {
+  public put<R>(url: string, options?: Options): Promise<R> {
     return this.request<R>(
       this.endpoint + url,
       { ...options, method: METHODS.PUT },
-      options.timeout,
+      options?.timeout,
     );
   }
 
@@ -49,11 +49,11 @@ export default class HTTPTransport {
     );
   }
 
-  public patch<R>(url: string, options: Options): Promise<R> {
+  public patch<R>(url: string, options?: Options): Promise<R> {
     return this.request<R>(
       this.endpoint + url,
       { ...options, method: METHODS.PATCH },
-      options.timeout,
+      options?.timeout,
     );
   }
 

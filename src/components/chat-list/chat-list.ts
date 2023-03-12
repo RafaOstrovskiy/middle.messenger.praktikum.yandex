@@ -1,15 +1,15 @@
 import tpl from './chat-list.hbs';
 import './chat-list.scss';
 import { ChatListItem } from '../chat-list-item/chat-list-item';
-import arrowRight from '../../../static/arrow-right.svg';
 import Block, { Props } from '../../core/block';
 import { Button } from '../button';
 import { ModalService } from '../../services/modal.service';
 import { ChatsResponse } from '../../api/api.types';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 import { Form } from '../form';
 import { FormInput } from '../form-input';
 import { chatsService } from '../../services';
+import { Link } from '../link';
 
 export type ChatListProps = Props & {
   chatsList: ChatsResponse[];
@@ -24,7 +24,6 @@ export class ChatListBase extends Block<ChatListProps> {
     super(
       {
         ...props,
-        arrowRight,
         button: new Button({
           text: 'Создать чат',
           type: 'button',
@@ -44,6 +43,10 @@ export class ChatListBase extends Block<ChatListProps> {
             },
           },
           className: ['add-chat-button'],
+        }),
+        link: new Link({
+          label: 'Профиль',
+          to: '/profile',
         }),
       },
       'div',

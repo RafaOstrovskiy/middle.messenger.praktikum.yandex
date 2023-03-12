@@ -1,16 +1,11 @@
 <div class="chat-aside__header">
   <div class="chat-aside__profile-link">
-    <a href="/profile">
-      <span>Профиль</span>
-      <img src="{{ arrowRight }}" alt="arrow">
-    </a>
+      {{{link}}}
   </div>
-
     {{{ button }}}
 </div>
 
 <ul class="chat-aside__list">
-
     {{#if isLoaded }}
         {{#each chats}}
             <li>{{{this}}}</li>

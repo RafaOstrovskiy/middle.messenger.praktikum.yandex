@@ -5,7 +5,7 @@ import avatarPlaceholder from '../../../static/avatar-placeholder.png';
 import { Form } from '../form';
 import { FormInput } from '../form-input';
 import { userService } from '../../services/user.service';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 
 class AvatarBase extends Block<Props> {
   constructor(props: Props) {

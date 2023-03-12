@@ -1,15 +1,15 @@
 import tpl from './profileEdit.hbs';
 import './profileEdit.scss';
-import arrowLeft from '../../../static/rounded-arrow-left.svg';
 import { Button } from '../../components/button';
 import Block, { Props } from '../../core/block';
 import { Avatar } from '../../components/avatar/avatar';
 import { SignUpProps } from '../sign-up';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 import { FormInput } from '../../components/form-input';
 import { Form } from '../../components/form';
 import { UserResponse } from '../../api/api.types';
 import { userService } from '../../services/user.service';
+import router from '../../core/Routing/router';
 
 export class ProfileEditPage extends Block<SignUpProps> {
   constructor(props: Props) {
@@ -18,7 +18,16 @@ export class ProfileEditPage extends Block<SignUpProps> {
       {
         ...props,
         avatar: new Avatar({}),
-        arrowLeft,
+        backButton: new Button({
+          type: 'button',
+          className: ['arrow-left-button'],
+          events: {
+            click: (e) => {
+              e?.preventDefault();
+              router.go('/profile');
+            },
+          },
+        }),
       },
       'nav',
     );

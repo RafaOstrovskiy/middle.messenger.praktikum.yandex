@@ -1,5 +1,6 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { EventBus } from './event-bus';
+import { v4 as makeUUID } from 'uuid';
 
 export interface Props extends Record<string, any> {
   className?: string[];
@@ -14,7 +15,7 @@ class Block<P extends Record<string, any> = any> {
     FLOW_RENDER: 'flow:render',
   } as const;
 
-  public id = nanoid(6);
+  public id = makeUUID();
 
   public children: Record<string, Block | Block[]>;
 
@@ -157,7 +158,6 @@ class Block<P extends Record<string, any> = any> {
 
   private _render() {
     const block = this.render();
-
     this._removeEvents();
 
     this._element.innerHTML = '';

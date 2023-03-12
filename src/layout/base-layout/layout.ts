@@ -4,7 +4,7 @@ import Block, { Props } from '../../core/block';
 import { ModalService } from '../../services/modal.service';
 
 export type LayoutProps = Props & {
-  page: Block<any>;
+  page?: Block<any>;
 };
 
 export class BaseLayout extends Block<LayoutProps> {

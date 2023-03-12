@@ -31,7 +31,22 @@ body {
     text-decoration: none;
 
     &:hover {
+      cursor: pointer;
       text-decoration: underline;
     }
+  }
+
+  .arrow-left-button {
+    display: flex;
+    margin: 0;
+    padding: 0 !important;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    object-fit: cover;
+    border-radius: 50% !important;
+    background-image: url("../../static/rounded-arrow-left.svg");
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
