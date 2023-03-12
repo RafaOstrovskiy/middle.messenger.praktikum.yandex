@@ -1,8 +1,7 @@
-FROM node:16.13.0
-WORKDIR /var/www/app
-COPY package.json package-lock.json ./
-RUN npm install
+FROM node
+WORKDIR /myapp
 COPY . .
+RUN npm install
 RUN npm run build
 EXPOSE 3000
-CMD ["node", "./server.js"]
+CMD ["node", "server.js"]
