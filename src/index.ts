@@ -11,7 +11,7 @@ import {
   signInPage,
   signUpPage,
 } from './pages';
-import Router from './core/Routing/Router';
+import Router from './core/Routing/router';
 import { BaseLayout } from './layout/base-layout';
 import { authService } from './services';
 

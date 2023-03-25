@@ -37,9 +37,7 @@ export class ChatsAPI {
   }
 
   async getToken(id: number): Promise<string> {
-    const { response } = await this.http.post<{ token: string }>(`/token/${id}`);
-
-    return JSON.parse(response).token;
+    return this.http.post(`/token/${id}`);
   }
 }
 

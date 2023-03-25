@@ -1,6 +1,7 @@
-import store from '../core/Store';
+import store from '../core/store';
 import MessageService from './message.service';
 import { chatsApi } from '../api/ChatsAPI';
+import { ChatsResponse } from '../api/api.types';
 
 export class ChatsService {
   async create(title: string) {
@@ -14,16 +15,20 @@ export class ChatsService {
   }
 
   async fetchChats() {
-    const { response } = await chatsApi.getChats();
-    const chats = JSON.parse(response);
+    await chatsApi.getChats().then((res: any) => {
+      const code = res.status;
 
-    chats.map(async (chat) => {
-      const token = await this.getToken(chat.id);
+      if (code === 200) {
+        const chats = JSON.parse(res.response);
 
-      await MessageService.connect(chat.id, token);
+        chats.map(async (chat: ChatsResponse) => {
+          const token = await this.getToken(chat.id);
+          await MessageService.connect(chat.id, token);
+        });
+
+        store.set('chats', chats);
+      }
     });
-
-    store.set('chats', chats);
   }
 
   addUserToChat(id: number, userId: number) {
@@ -49,7 +54,9 @@ export class ChatsService {
   }
 
   getToken(id: number) {
-    return chatsApi.getToken(id);
+    return chatsApi.getToken(id).then((res: any) => {
+      return JSON.parse(res.response).token;
+    });
   }
 
   selectChat(id: number) {

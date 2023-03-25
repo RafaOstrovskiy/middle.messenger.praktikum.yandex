@@ -1,12 +1,12 @@
 import tpl from './passwordUpdate.hbs';
 import './passwordUpdate.scss';
-import arrowLeft from '../../../static/rounded-arrow-left.svg';
 import { Button } from '../../components/button';
 import { Avatar } from '../../components/avatar/avatar';
 import Block, { Props } from '../../core/block';
 import { Form } from '../../components/form';
 import { FormInput } from '../../components/form-input';
 import { userService } from '../../services/user.service';
+import router from '../../core/Routing/router';
 
 export class UpdatePasswordPage extends Block<Props> {
   constructor(props: Props) {
@@ -15,7 +15,16 @@ export class UpdatePasswordPage extends Block<Props> {
       {
         ...props,
         avatar: new Avatar({}),
-        arrowLeft,
+        backButton: new Button({
+          type: 'button',
+          className: ['arrow-left-button'],
+          events: {
+            click: (e) => {
+              e?.preventDefault();
+              router.go('/profile');
+            },
+          },
+        }),
       },
       'nav',
     );

@@ -1,11 +1,12 @@
 import tpl from './profile.hbs';
 import './profile.scss';
-import arrowLeft from '../../../static/rounded-arrow-left.svg';
 import Block, { Props } from '../../core/block';
 import { Avatar } from '../../components/avatar/avatar';
 import { Button } from '../../components/button';
-import { withStore } from '../../core/Store';
+import { withStore } from '../../core/store';
 import { authService } from '../../services';
+import { Link } from '../../components/link';
+import router from '../../core/Routing/router';
 
 export class ProfilePage extends Block<Props> {
   constructor(props: Props) {
@@ -14,7 +15,6 @@ export class ProfilePage extends Block<Props> {
       {
         ...props,
         avatar: new Avatar({}),
-        arrowLeft,
         logoutBtn: new Button({
           text: 'Выйти',
           className: ['link', 'red'],
@@ -22,6 +22,24 @@ export class ProfilePage extends Block<Props> {
             click: (e) => {
               e?.preventDefault();
               authService.logout();
+            },
+          },
+        }),
+        editProfileLink: new Link({
+          label: 'Изменить данные',
+          to: '/settings',
+        }),
+        editPasswordLink: new Link({
+          label: 'Изменить пароль',
+          to: '/password-update',
+        }),
+        backButton: new Button({
+          type: 'button',
+          className: ['arrow-left-button'],
+          events: {
+            click: (e) => {
+              e?.preventDefault();
+              router.go('/messenger');
             },
           },
         }),
